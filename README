@@ -1,0 +1,8 @@
+關於 freebsddoc:
+
+freebsddoc 主要是 FreeBSD 文件的中文翻譯計畫，
+針對 doc/, www/ 的文件與網站翻譯
+
+若想要最新的中文翻譯文件，請利用 git 方式取得：
+git clone git://github.com/chinsan/freebsddoc.git
+
