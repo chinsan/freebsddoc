@@ -23,11 +23,12 @@
   <sect1 id="security-synopsis">
     <title>概述</title>
 
-    <para>這一章將對系統安全的基本概念進行介紹，除此之外，還將介紹一些好的習慣，以及
-	&os; 下的一些更深入的話題。這章的許多內容對於一般的系統和 Internet 
-	安全也適用。如今，Internet 已經不再像以前那樣是個人人都願意與您作好鄰居的『友善場所』。
-	必須讓系統更安全，才能去保護您的資料、智慧財產、寶貴時間以及其他很多東西，
-	而不至於被入侵者或心存惡意的人所竊取。</para>
+    <para>這一章將對系統安全的基本概念進行介紹，除此之外，還將介紹一些好的習慣，
+      以及 &os; 下的一些更深入的話題。這章的許多內容對於一般的系統和 Internet
+      安全也適用。  如今，Internet
+      已經不再像以前那樣是個人人都願意與您作好鄰居的『友善場所』。
+      必須讓系統更安全，才能去保護您的資料、智慧財產、寶貴時間以及其他很多東西，
+      而不至於被入侵者或心存惡意的人所竊取。</para>
 
     <para>&os; 提供了一系列工具和相關機制，來確保系統和網路的完整、安全。</para>
 
@@ -49,19 +50,22 @@
 
       <listitem>
 	<para>如何設定 <acronym>TCP</acronym> Wrappers 
-	  以便與 <command>inetd</command> 配合使用。</para>
+	  以便與 <application>inetd</application> 配合使用。</para>
       </listitem>
 
       <listitem>
-	<para>如何在 &os; 5.0. 之前的版本上設定 <application>KerberosIV</application>。</para>
+	<para>如何在 &os; 5.0. 之前的版本上設定
+	  <application>KerberosIV</application>。</para>
       </listitem>
 
       <listitem>
-	<para>如何在 &os; 5.0 (含之後版本)上設定 <application>Kerberos5</application>。</para>
+	<para>如何在 &os; 設定
+	  <application>Kerberos5</application>。</para>
       </listitem>
 
       <listitem>
-	<para>如何設定 IPsec 以及在 &os;/&windows; 上建立 <acronym>VPN</acronym> 網路。</para>
+	<para>如何設定 IPsec 以及在 &os;/&windows; 上建立
+	  <acronym>VPN</acronym> 網路。</para>
       </listitem>
      
       <listitem>
@@ -70,7 +74,8 @@
       </listitem>
 
       <listitem>
-	<para>了解檔案系統的 <acronym>ACL</acronym>s 機制為何，以及如何運用。</para>
+	<para>了解檔案系統的 <acronym>ACL</acronym> 機制為何，
+	  以及如何運用。</para>
       </listitem>
 
       <listitem>
@@ -79,7 +84,8 @@
       </listitem>
 
       <listitem>
-	<para>如何善用 &os; 安全公告(Security Advisories)，並採取相應措施。</para>
+	<para>如何善用 &os; 安全公告(Security Advisories)，
+	  並採取相應措施。</para>
       </listitem>
 
       <listitem>
@@ -95,25 +101,30 @@
       </listitem>
     </itemizedlist>
 
-    <para>本書中其他章節，也有介紹安全方面的其他話題。例如：
-       在 <xref linkend="mac"> 有談到 Mandatory Access Control， Internet Firewalls 則在 <xref
-      linkend="firewalls">。</para>
+    <para>本書中其他章節，也有介紹安全方面的其他話題。例如：在 <xref
+      linkend="mac"> 有談到 Mandatory Access Control，
+      Internet Firewalls 則在 <xref linkend="firewalls">。</para>
   </sect1>
 
   <sect1 id="security-intro">
     <title>介紹</title>
 
-    <para>安全，對系統管理者而言，是至始至終最基本的要求。由於所有的 BSD &unix; multi-user
-	系統都提供了與生俱來的基本安全，所以建立、維護額外的安全機制，以確保使用者的『可靠』，
-	可能也就是系統管理員最需要慎思的艱巨任務了。機器的安全性取決於您所建立的安全措施，
-	而許多安全方面的考量，則會與人們使用電腦時的便利相矛盾。一般來說， &unix; 
-	系統可同時執行許多數目的程式 process ，並且其中許多 process 也同時以 Server 端來運作。
-	 ── 這意味著，外部實體機器能夠與它們互相連接，並產生互動。現在的一般桌機，
-	已經能夠達到以前小型主機甚至大型主機的性能，而隨著這些電腦的網路連接和在更大範圍內互相連接
-	，安全也成為了一個日益嚴峻的課題。</para>
+    <para>安全，對系統管理者而言，是至始至終最基本的要求。  由於所有的 BSD
+      &unix; multi-user 系統都提供了與生俱來的基本安全，所以建立、
+      維護額外的安全機制，以確保使用者的『可靠』，
+      可能也就是系統管理員最需要慎思的艱巨任務了。
+      機器的安全性取決於您所建立的安全措施，而許多安全方面的考量，
+      則會與人們使用電腦時的便利相矛盾。  一般來說， &unix;
+      系統可同時執行許多數目的程式 process，並且其中許多 process
+      也同時以 Server 端來運作。  ── 這意味著，
+      外部實體機器能夠與它們互相連接，並產生互動。現在的一般桌機，
+      已經能夠達到以前小型主機甚至大型主機的性能，
+      而隨著這些電腦的網路連接和在更大範圍內互相連接，
+      安全也成為了一個日益嚴峻的課題。</para>
 
     <para>安全最好的方式，是能夠透過像『洋蔥』那樣的層層防護模式。
-	簡單講，應該儘可能的建立多層次安全防護，並小心地監視各類針對系統的入侵疑點。
+      簡單講，應該儘可能的建立多層次安全防護，
+      並小心地監視各類針對系統的入侵疑點。
 	You do not want to
       overbuild your security or you will interfere with the detection
       side, and detection is one of the single most important aspects of
@@ -155,15 +166,15 @@
     </orderedlist>
 
     <indexterm>
-      <primary>DoS attacks</primary>
-      <see>Denial of Service (DoS)</see>
+      <primary>服務阻斷攻擊(DoS)</primary>
+      <see>服務阻斷攻擊(Denial of Service, DoS)</see>
     </indexterm>
     <indexterm>
       <primary>security</primary>
-      <secondary>DoS attacks</secondary>
-      <see>Denial of Service (DoS)</see>
+      <secondary>服務阻斷攻擊(DoS)</secondary>
+      <see>服務阻斷攻擊(Denial of Service, DoS)</see>
     </indexterm>
-    <indexterm><primary>Denial of Service (DoS)</primary></indexterm>
+    <indexterm><primary>服務阻斷攻擊(Denial of Service, DoS)</primary></indexterm>
 
     <para>A denial of service attack is an action that deprives the
       machine of needed resources.  Typically, DoS attacks are

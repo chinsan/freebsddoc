@@ -1,5 +1,5 @@
 #
-# $FreeBSD: doc/zh_TW.Big5/books/handbook/Makefile,v 1.10 2008/06/29 16:05:30 chinsan Exp $
+# $FreeBSD: doc/zh_TW.Big5/books/handbook/Makefile,v 1.9 2008/05/01 05:09:34 chinsan Exp $
 # Original revision: 1.108
 #
 # Build the FreeBSD Handbook.

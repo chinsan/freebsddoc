@@ -117,17 +117,15 @@ Id Refs Address    Size     Name
       <secondary>COMPAT_LINUX</secondary>
     </indexterm>
 
-    <para>If for some reason you do not want to or cannot load the KLD,
-      then you may statically link Linux binary compatibility into the kernel
-      by adding <literal>options COMPAT_LINUX</literal> to your kernel
-      configuration file.  Then install your new kernel as described in
-      <xref linkend="kernelconfig">.</para>
+    <para>如果因為某些原因導致您不想或無法載入 KLD，您可以將 Linux 相容模式透過
+    　靜態連結的方式加入您的 kernel，您只需要在 kernel 設定檔中加入 <literal>options COMPAT_LINUX</literal>。
+      您可以參考這個章節 <xref linkend="kernelconfig"> 來安裝您的 kernel。</para>
 
     <sect2>
-      <title>Installing Linux Runtime Libraries</title>
+      <title>安裝 Linux Runtime Libraries</title>
       <indexterm>
 	<primary>Linux</primary>
-	<secondary>installing Linux libraries</secondary>
+	<secondary>安裝 Linux libraries</secondary>
       </indexterm>
 
       <para>This can be done one of two ways, either by using the

@@ -1,11 +1,11 @@
 # 
-# $FreeBSD: doc/zh_TW.Big5/books/faq/Makefile,v 1.7 2006/10/20 03:17:29 chinsan Exp $
+# $FreeBSD: doc/zh_TW.Big5/books/faq/Makefile,v 1.6 2003/01/20 06:43:25 vanilla Exp $
 #
 # Build the FreeBSD Chinese-Big5 FAQ
 #
 
 MAINTAINER=vanilla@FreeBSD.org ijliao@FreeBSD.org clive@FreeBSD.org \
-	   clsung@FreeBSD.org chinsan@FreeBSD.org
+	   clsung@FreeBSD.org
 
 DOC?= book
 

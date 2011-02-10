@@ -1,8 +1,8 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: doc/zh_TW.Big5/books/handbook/ports/chapter.sgml,v 1.13 2008/01/28 08:21:17 chinsan Exp $
-     Original revision: 1.273
+     $FreeBSD: doc/zh_TW.Big5/books/handbook/ports/chapter.sgml,v 1.12 2008/01/26 16:13:04 chinsan Exp $
+     Original revision: 1.271
 -->
 
 <chapter id="ports">
@@ -120,7 +120,7 @@
 
     <itemizedlist>
       <title>Package 好處在於：</title>
-      
+
       <listitem>
 	<para>同樣是壓縮過的 package 與原始碼 tarball 相比，
 	  前者通常會比後者小多了。</para>
@@ -142,7 +142,7 @@
 
     <itemizedlist>
       <title>Ports 好處在於：</title>
-      
+
       <listitem>
 	<para>為了讓 package 能在大多數系統上順利執行，
 	  通常在編譯時會使用比較保守的選項。  然而，
@@ -266,13 +266,16 @@ lsof: /usr/ports/sysutils/lsof</screen>
 	<screen>&prompt.root; <userinput>echo /usr/ports/*/*lsof*</userinput>
 /usr/ports/sysutils/lsof</screen>
 
-	<para>請注意，這也會顯示 <filename role="directory">/usr/ports/distfiles</filename> 目錄內有符合檔名的檔案。</para>
+	<para>請注意，這也會傳回 <filename
+	  role="directory">/usr/ports/distfiles</filename>
+	  目錄內類似檔名的檔案。</para>
       </listitem>
 
       <listitem>
 	<para>還有另一招，就是用 Ports Collection 本身內建的搜尋機制。
 	  要用的時候，請先切換到 <filename>/usr/ports</filename> 目錄。
-	  然後，打 <command>make search name=<replaceable>程式名稱</replaceable></command>
+	  然後，打 <command>make <maketarget>search</maketarget>
+	  name=<replaceable>程式名稱</replaceable></command>
 	  ，其中 <replaceable>程式名稱</replaceable> 請改為想找的軟體名稱。
 	  舉例來說，若要找的是 <command>lsof</command> 的話，那麼就是：</para>
 
@@ -291,7 +294,8 @@ R-deps: </screen>
 	而搜尋結果的其他部分，因為與 port 安裝較無關係，所以這裡就不講了。</para>
 
       <para>若要更徹底的搜尋，那麼可以改用 <command>make
-        search key=<replaceable>string</replaceable></command>，其中 
+        <maketarget>search</maketarget>
+	key=<replaceable>string</replaceable></command>，其中 
         <replaceable>string</replaceable> 請改為想搜尋的關鍵字。
         如此一來會找 port 名稱、軟體簡介(comments)、軟體敘述檔(descriptions)
         以及軟體相依關係(dependencies)裡面是否有符合關鍵字，
@@ -479,6 +483,10 @@ docbook                     =
 	  </entry></row>
 
         <row><entry>*</entry><entry>該軟體同時有許多版本。</entry></row>
+
+        <row><entry>!</entry><entry>該軟體因為某些因素而存在於索引之中，
+	  但對已裝的版本與索引內的版本，<command>pkg_version</command>
+	  無法比較出差異。</entry></row>
 
 	</tbody>
 	</tgroup>

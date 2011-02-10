@@ -2,7 +2,7 @@
      The FreeBSD Documentation Project
 
      $FreeBSD: doc/zh_TW.Big5/books/handbook/mirrors/chapter.sgml,v 1.5 2006/07/03 15:53:46 vanilla Exp $
-     Original revision: 1.420
+     Original revision: 1.438
 -->
 
 <appendix id="mirrors">
@@ -12,9 +12,10 @@
     <title>CDROM 及 DVD 發行商</title>
 
     <sect2>
-      <title>盒裝產品的零售處：</title>
+      <title>盒裝產品的零售處</title>
 
-      <para>FreeBSD 盒裝產品(含 FreeBSD 光碟及其他一些軟體、書面文件)的零售業者：</para>
+      <para>FreeBSD 盒裝產品(含 FreeBSD 光碟及其他一些軟體、書面文件)
+	的零售業者：</para>
 
       <itemizedlist>
 	<listitem>
@@ -36,7 +37,7 @@
     <sect2>
       <title>CD 及 DVD 合集</title>
 
-      <para>FreeBSD 光碟(CD 及 DVD)的網路零售業者：</para>
+      <para>FreeBSD CD 光碟(CD 及 DVD)的網路零售業者：</para>
 
     <itemizedlist>
       <listitem>
@@ -75,7 +76,7 @@
 
       <listitem>
 	<address>
-	  <otheraddr>Hinner EDV</otheraddr>
+	  <otheraddr>Dr. Hinner EDV</otheraddr>
 	  <street>St. Augustinus-Str. 10</street>
 	  <postcode>D-81825</postcode> <city>M&uuml;nchen</city>
 	  <country>Germany</country>
@@ -172,7 +173,8 @@
     <sect2>
       <title>經銷商(Distributors)</title>
 
-      <para>若你是區域經銷商，並想代理經銷 FreeBSD 光碟產品的話，請與下列的代理商聯繫：</para>
+      <para>若你是區域經銷商，並想代理經銷 FreeBSD 光碟產品的話，
+	請與下列的代理商聯繫：</para>
 
       <itemizedlist>
 	<listitem>
@@ -242,23 +244,19 @@
   <sect1 id="mirrors-ftp">
     <title>FTP 站</title>
 
-    <para>The official sources for FreeBSD are available via anonymous FTP
-      from a worldwide set of mirror sites.  The site
-      <ulink url="ftp://ftp.FreeBSD.org/pub/FreeBSD/"></ulink> is well
-      connected and allows a large number of connections to it, but
-      you are probably better off finding a <quote>closer</quote>
-      mirror site (especially if you decide to set up some sort of
-      mirror site).</para>
+    <para>官方的 &os; 下載點可從遍佈全球的 mirror 站，透過 anonymous FTP
+      方式來下載。  在此站
+      <ulink url="ftp://ftp.FreeBSD.org/pub/FreeBSD/"></ulink> 有高速連結以及
+      允許可同時有許多大量的連線，但您或許會想找個<quote>更近的</quote> mirror
+      點(尤其是想建立某些 mirror 的時候)。</para>
 
-    <para>The <ulink
-	url="http://mirrorlist.FreeBSD.org/">FreeBSD mirror
-	sites database</ulink> is more accurate than the mirror listing in the
-      Handbook, as it gets its information from the DNS rather than relying on
-      static lists of hosts.</para>
+    <para><ulink
+      url="http://mirrorlist.FreeBSD.org/">FreeBSD mirror sites 資料庫</ulink>
+      有比本手冊中所列的 mirror 列表更精準的資料，因為它是直接從 DNS 中取得資料
+      ，而非固定的主機列表。</para>
 
-    <para>Additionally, FreeBSD is available via anonymous FTP from the
-      following mirror sites.  If you choose to obtain FreeBSD via anonymous
-      FTP, please try to use a site near you.  The mirror sites listed as
+    <para>此外，FreeBSD 可以透過下列 FTP mirror 站台下載。如果您決定透過 FTP
+      來下載 FreeBSD，請您試著從離您最近的站台下載。  The mirror sites listed as
       <quote>Primary Mirror Sites</quote> typically have the entire FreeBSD archive (all
       the currently available versions for each of the architectures) but
       you will probably have faster download times from a site that is
@@ -273,14 +271,14 @@
   </sect1>
 
     <sect1 id="anoncvs">
-      <title>Anonymous CVS</title>
+      <title>匿名 CVS</title>
 
       <sect2>
-	<title><anchor id="anoncvs-intro">anoncvs 簡介</title>
+	<title><anchor id="anoncvs-intro">簡介</title>
 
 	<indexterm>
 	  <primary>CVS</primary>
-	  <secondary>anonymous</secondary>
+	  <secondary>匿名</secondary>
 	</indexterm>
 
 	<para>Anonymous CVS (or, as it is otherwise known,
@@ -333,7 +331,7 @@
       </sect2>
 
       <sect2>
-	<title><anchor id="anoncvs-usage">Using Anonymous CVS</title>
+	<title><anchor id="anoncvs-usage">使用匿名 CVS</title>
 
 	<para>Configuring &man.cvs.1; to use an Anonymous CVS repository
 	  is a simple matter of setting the <envar>CVSROOT</envar>
@@ -343,37 +341,40 @@
 
 	<itemizedlist>
 	  <listitem>
-	    <para><emphasis>Austria(奧地利)</emphasis>:
+	    <para><emphasis>Austria</emphasis>:
 	      :pserver:anoncvs@anoncvs.at.FreeBSD.org:/home/ncvs
 	      (Use <command>cvs login</command> and enter any
 	      password when prompted.)</para>
 	  </listitem>
 	  <listitem>
-	    <para><emphasis>France(法國)</emphasis>:
+	    <para><emphasis>France</emphasis>:
 	      :pserver:anoncvs@anoncvs.fr.FreeBSD.org:/home/ncvs
 	      (pserver (password <quote>anoncvs</quote>), ssh (no password))
 	    </para>
 	  </listitem>
 	  <listitem>
-	    <para><emphasis>Germany(德國)</emphasis>:
+	    <para><emphasis>Germany</emphasis>:
 	      :pserver:anoncvs@anoncvs.de.FreeBSD.org:/home/ncvs
-	      (Use <command>cvs login</command> and enter the password
-	      <quote>anoncvs</quote> when prompted.)</para>
-	  </listitem>
-	  <listitem>
-	    <para><emphasis>Germany(德國)</emphasis>:
-	      :pserver:anoncvs@anoncvs2.de.FreeBSD.org:/home/ncvs
 	      (rsh, pserver, ssh, ssh/2022)
 	      </para>
 	  </listitem>
 	  <listitem>
-	    <para><emphasis>Japan(日本)</emphasis>:
+	    <para><emphasis>Japan</emphasis>:
 	      :pserver:anoncvs@anoncvs.jp.FreeBSD.org:/home/ncvs
 	      (Use <command>cvs login</command> and enter the password
 	      <quote>anoncvs</quote> when prompted.)</para>
 	  </listitem>
 	  <listitem>
-	    <para><emphasis>USA(美國)</emphasis>:
+	    <para><emphasis>Taiwan</emphasis>:
+	      :pserver:anoncvs@anoncvs.tw.FreeBSD.org:/home/ncvs
+	      (pserver (use <command>cvs login</command> and enter any
+	      password when prompted), ssh (no password))</para>
+
+	      <programlisting>SSH2 HostKey: 1024 e8:3b:29:7b:ca:9f:ac:e9:45:cb:c8:17:ae:9b:eb:55 /etc/ssh/ssh_host_dsa_key.pub</programlisting>
+      
+	  </listitem>
+	  <listitem>
+	    <para><emphasis>USA</emphasis>:
 	      freebsdanoncvs@anoncvs.FreeBSD.org:/home/ncvs
 	      (ssh only - no password)</para>
 
@@ -382,12 +383,11 @@ SSH2 HostKey: 1024 52:02:38:1a:2f:a8:71:d3:f5:83:93:8d:aa:00:6f:65 ssh_host_dsa_
 
 	  </listitem>
 	  <listitem>
-	    <para><emphasis>USA(美國)</emphasis>:
-	      anoncvs@anoncvs1.FreeBSD.org:/home/ncvs (ssh only - no
+	    <para><emphasis>USA</emphasis>:
+	      anoncvs@anoncvs1.FreeBSD.org:/home/ncvs (ssh2 only - no
 	      password)</para>
 
-	    <programlisting>SSH HostKey: 1024 8b:c4:6f:9a:7e:65:8a:eb:50:50:29:7c:a1:47:03:bc root@ender.liquidneon.com
-SSH2 HostKey: 2048 4d:59:19:7b:ea:9b:76:0b:ca:ee:da:26:e2:3a:83:b8 ssh_host_dsa_key.pub</programlisting>
+	    <programlisting>SSH2 HostKey: 2048 53:1f:15:a3:72:5c:43:f6:44:0e:6a:e9:bb:f8:01:62 /etc/ssh/ssh_host_dsa_key.pub</programlisting>
 
 	  </listitem>
 	</itemizedlist>
@@ -421,7 +421,7 @@ SSH2 HostKey: 2048 4d:59:19:7b:ea:9b:76:0b:ca:ee:da:26:e2:3a:83:b8 ssh_host_dsa_
       </sect2>
 
       <sect2>
-	<title>Examples</title>
+	<title>範例</title>
 
 	<para>While it really is recommended that you read the manual page
 	  for &man.cvs.1; thoroughly before doing anything, here are some
@@ -431,9 +431,9 @@ SSH2 HostKey: 2048 4d:59:19:7b:ea:9b:76:0b:ca:ee:da:26:e2:3a:83:b8 ssh_host_dsa_
 	<example>
 	  <title>Checking Out Something from -CURRENT (&man.ls.1;):</title>
 
-	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.jp.FreeBSD.org:/home/ncvs</userinput>
+	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.tw.FreeBSD.org:/home/ncvs</userinput>
 &prompt.user; <userinput>cvs login</userinput>
-<emphasis>At the prompt, enter the password</emphasis> <quote>anoncvs</quote>.
+<emphasis>At the prompt, enter any word for</emphasis> <quote>password</quote>.
 &prompt.user; <userinput>cvs co ls</userinput>
 	  </screen>
 	</example>
@@ -452,9 +452,9 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
 	  <title>Checking Out the Version of &man.ls.1; in the 6-STABLE
 	    Branch:</title>
 
-	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.jp.FreeBSD.org:/home/ncvs</userinput>
+	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.tw.FreeBSD.org:/home/ncvs</userinput>
 &prompt.user; <userinput>cvs login</userinput>
-<emphasis>At the prompt, enter the password</emphasis> <quote>anoncvs</quote>.
+<emphasis>At the prompt, enter any word for</emphasis> <quote>password</quote>.
 &prompt.user; <userinput>cvs co -rRELENG_6 ls</userinput>
 	  </screen>
 	</example>
@@ -462,9 +462,9 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
 	<example>
 	  <title>Creating a List of Changes (as Unified Diffs) to &man.ls.1;</title>
 
-	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.jp.FreeBSD.org:/home/ncvs</userinput>
+	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.tw.FreeBSD.org:/home/ncvs</userinput>
 &prompt.user; <userinput>cvs login</userinput>
-<emphasis>At the prompt, enter the password</emphasis> <quote>anoncvs</quote>.
+<emphasis>At the prompt, enter any word for</emphasis> <quote>password</quote>.
 &prompt.user; <userinput>cvs rdiff -u -rRELENG_5_3_0_RELEASE -rRELENG_5_4_0_RELEASE ls</userinput>
 	  </screen>
 	</example>
@@ -472,9 +472,9 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
 	<example>
 	  <title>Finding Out What Other Module Names Can Be Used:</title>
 
-	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.jp.FreeBSD.org:/home/ncvs</userinput>
+	  <screen>&prompt.user; <userinput>setenv CVSROOT :pserver:anoncvs@anoncvs.tw.FreeBSD.org:/home/ncvs</userinput>
 &prompt.user; <userinput>cvs login</userinput>
-<emphasis>At the prompt, enter the password</emphasis> <quote>anoncvs</quote>.
+<emphasis>At the prompt, enter any word for</emphasis> <quote>password</quote>.
 &prompt.user; <userinput>cvs co modules</userinput>
 &prompt.user; <userinput>more modules/modules</userinput>
 	  </screen>
@@ -482,7 +482,7 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
       </sect2>
 
       <sect2>
-	<title>Other Resources</title>
+	<title>其他資源</title>
 
 	<para>The following additional resources may be helpful in learning
 	  CVS:</para>
@@ -509,7 +509,7 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
     
     
   <sect1 id="ctm">
-    <title>Using CTM</title>
+    <title>使用 CTM</title>
 
       <indexterm>
 	<primary>CTM</primary>
@@ -614,8 +614,7 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
       </sect2>
 
       <sect2>
-	<title>Using <application>CTM</application> for the First
-	  Time</title>
+	<title>第一次使用 <application>CTM</application></title>
 
 	<para>Before you can start using <application>CTM</application>
 	  deltas, you will need to get to a starting point for the deltas
@@ -702,7 +701,7 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
       </sect2>
 
       <sect2>
-	<title>Other Interesting <application>CTM</application> Options</title>
+	<title>其他有趣的 <application>CTM</application> 選項</title>
 
 	<sect3>
 	  <title>Finding Out Exactly What Would Be Touched by an
@@ -822,7 +821,7 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
       </varlistentry>
 
       <varlistentry>
-	<term>Taiwan/R.O.C.(台灣/中華民國)</term>
+	<term>Taiwan/R.O.C.</term>
 
 	<listitem>
 	  <itemizedlist>
@@ -848,10 +847,10 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
   </sect2></sect1>
 
   <sect1 id="cvsup">
-    <title>Using CVSup</title>
+    <title>使用 CVSup</title>
     
     <sect2 id="cvsup-intro">
-      <title>CVSup 簡介</title>
+      <title>簡介</title>
       
       <para><application>CVSup</application> is a software package for
 	distributing and updating source trees from a master CVS
@@ -886,6 +885,27 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
 	<application>Sup</application> is no longer used in the FreeBSD
 	project, because <application>CVSup</application> is both faster
 	and more flexible.</para>
+
+      <note>
+	<para>The <application>csup</application> utility is a rewrite of the
+	  <application>CVSup</application> software in C.  Its biggest
+	  advantage is, that it is faster and does not depend on the
+	  Modula-3 language, thus you do not need to install it as a
+	  requirement.  Moreover, if you are using &os; 6.2 or later,
+	  you can use it out-of-the-box, since it is included in the base
+	  system.  Older &os; versions do not have &man.csup.1; in their
+	  base system but you can easily install the
+	  <filename role="package">net/csup</filename> port, or a precompiled
+	  package.  The <application>csup</application> utility does not
+	  support CVS mode, though.  If you want to mirror complete
+	  repositories, you will still need to use
+	  <application>CVSup</application>.  If you decided to use
+	  <application>csup</application>, just skip the steps on the
+	  installation of <application>CVSup</application> and
+	  substitute the references of <application>CVSup</application> with
+	  <application>csup</application> while following the remainder of
+	  this article.</para>
+      </note>
     </sect2>
 
     <sect2 id="cvsup-install">
@@ -909,6 +929,14 @@ Warning: Permanently added 'anoncvs.freebsd.org' (DSA) to the list of known host
 	  <application>CVSup</application> <acronym>GUI</acronym>,
 	  <filename role="package">net/cvsup-without-gui</filename>.</para>
 	</note>
+
+      <para>If you want to install <application>csup</application> on
+	FreeBSD 6.1 or earlier, you can use the precompiled
+	<filename role="package">net/csup</filename> package
+	from the FreeBSD <link linkend="ports">packages collection</link>.
+	If you prefer to build <application>csup</application> from source,
+	you can use the <filename role="package">net/csup</filename>
+	port instead.</para>
     </sect2>
 
     <sect2 id="cvsup-config">
@@ -1829,7 +1857,16 @@ doc/zh_*</screen>
 			<para>Polish language support.</para>
 		      </listitem>
 		    </varlistentry>
-	
+
+		    <varlistentry>
+		      <term><literal>ports-ports-mgmt
+			  release=cvs</literal></term>
+
+		      <listitem>
+			<para>Utilities to manage ports and packages.</para>
+		      </listitem>
+		    </varlistentry>
+
 		    <varlistentry>
 		      <term><literal>ports-portuguese
 			  release=cvs</literal></term>
@@ -1951,6 +1988,15 @@ doc/zh_*</screen>
 		    </varlistentry>
 
 		    <varlistentry>
+		      <term><literal>ports-x11-drivers
+			  release=cvs</literal></term>
+
+		      <listitem>
+			<para>X11 drivers.</para>
+		      </listitem>
+		    </varlistentry>
+
+		    <varlistentry>
 		      <term><literal>ports-x11-fm
 			  release=cvs</literal></term>
 
@@ -2040,6 +2086,17 @@ doc/zh_*</screen>
 			<para>User utilities that may be needed in
 			  single-user mode
 			  (<filename>/usr/src/bin</filename>).</para>
+		      </listitem>
+		    </varlistentry>
+
+		    <varlistentry>
+		      <term><literal>src-cddl
+			  release=cvs</literal></term>
+
+		      <listitem>
+			<para>Utilities and libraries covered by the
+			  CDDL license
+			  (<filename>/usr/src/cddl</filename>).</para>
 		      </listitem>
 		    </varlistentry>
 
@@ -2164,6 +2221,17 @@ doc/zh_*</screen>
 			<para>Files required to produce a FreeBSD
 			  release
 			  (<filename>/usr/src/release</filename>).</para>
+		      </listitem>
+		    </varlistentry>
+		    
+		    <varlistentry>
+		      <term><literal>src-rescue
+			  release=cvs</literal></term>
+		      
+		      <listitem>
+			<para>Statically linked programs for emergency
+			   recovery; see &man.rescue.8;
+			  (<filename>/usr/src/rescue</filename>).</para>
 		      </listitem>
 		    </varlistentry>
 
@@ -2304,16 +2372,18 @@ doc/zh_*</screen>
 
       <para>For the <application>CVSup</application> FAQ and other 
 	information about <application>CVSup</application>, see
-	<ulink url="http://www.polstra.com/projects/freeware/CVSup/">The
+	<ulink url="http://www.cvsup.org">The
 	  CVSup Home Page</ulink>.</para>
 
       <para>Most FreeBSD-related discussion of
 	<application>CVSup</application> takes place on the
 	&a.hackers;.  New versions of the software are announced there,
 	as well as on the &a.announce;.</para>
-      
-      <para>Questions and bug reports should be addressed to the author
-	of the program at <email>cvsup-bugs@polstra.com</email>.</para>
+
+      <para>For questions or bug reports about
+	<application>CVSup</application> take a look at the
+	<ulink url="http://www.cvsup.org/faq.html#bugreports">
+	CVSup FAQ</ulink>.</para>
     </sect2>
 
     <sect2 id="cvsup-mirrors">
@@ -2330,7 +2400,7 @@ doc/zh_*</screen>
     <title>Using Portsnap</title>
 
     <sect2 id="portsnap-intro">
-      <title>Portsnap 簡介</title>
+      <title>Introduction</title>
 
       <para><application>Portsnap</application> is a system for securely
 	distributing the &os; ports tree.  Approximately once an hour,
@@ -2368,7 +2438,7 @@ doc/zh_*</screen>
       <para>On &os; 6.0 and more recent versions,
 	<application>Portsnap</application> is contained in the &os;
 	base system.  On older versions of &os;, it can be installed
-	using the <filename role="package">sysutils/portsnap</filename>
+	using the <filename role="package">ports-mgmt/portsnap</filename>
 	port.</para>
     </sect2>
 
@@ -2548,6 +2618,15 @@ doc/zh_*</screen>
 	<listitem>
 	  <para>The line of development for FreeBSD-6.X, also known
 	    as FreeBSD 6-STABLE</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>RELENG_6_2</term>
+
+	<listitem>
+	  <para>The release branch for FreeBSD-6.2, used only for
+	    security advisories and other critical fixes.</para>
 	</listitem>
       </varlistentry>
 
@@ -2762,6 +2841,14 @@ doc/zh_*</screen>
 	tagged with any special name for releases.</para>
 
     <variablelist>
+      <varlistentry>
+	<term>RELENG_6_2_0_RELEASE</term>
+
+	<listitem>
+	  <para>FreeBSD 6.2</para>
+	</listitem>
+      </varlistentry>
+
       <varlistentry>
 	<term>RELENG_6_1_0_RELEASE</term>
 
@@ -3144,6 +3231,22 @@ doc/zh_*</screen>
 	  <itemizedlist>
 	    <listitem><para>vol/4/freebsd-core: A full mirror of the
 	      FreeBSD FTP server.</para></listitem>
+	  </itemizedlist>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>Taiwan</term>
+
+	<listitem>
+	  <para>rsync://ftp.tw.FreeBSD.org/</para>
+	  <para>rsync://ftp2.tw.FreeBSD.org/</para>
+	  <para>rsync://ftp6.tw.FreeBSD.org/</para>
+
+	  <para>Available collections:</para>
+	  <itemizedlist>
+	    <listitem><para>FreeBSD: A full mirror of the FreeBSD FTP
+	      server.</para></listitem>
 	  </itemizedlist>
 	</listitem>
       </varlistentry>

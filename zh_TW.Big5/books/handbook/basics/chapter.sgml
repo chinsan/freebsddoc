@@ -1,7 +1,7 @@
 <!--
      The FreeBSD Documentation Project
 
-     $FreeBSD: doc/zh_TW.Big5/books/handbook/basics/chapter.sgml,v 1.7 2008/01/26 04:04:02 chinsan Exp $
+     $FreeBSD: doc/zh_TW.Big5/books/handbook/basics/chapter.sgml,v 1.6 2008/01/13 15:45:38 chinsan Exp $
      Original revision: 1.152
 -->
 
@@ -2133,38 +2133,32 @@ Swap: 256M Total, 38M Used, 217M Free, 15% Inuse
         <para>&man.a.out.5;</para>
 
         <para>最古老、<quote>經典</quote> 的 &unix; object 檔格式。
-          It uses a short and compact header with a magic
-          number at the beginning that is often used to characterize
-          the format (see &man.a.out.5; for more details).  It
-          contains three loaded segments: .text, .data, and .bss plus
-          a symbol table and a string table.</para>
+          該格式在檔案開頭處會有一小段短而緊湊的 magic number，
+	  用以識別格式(細節請參閱 &man.a.out.5; 說明)。
+	  這其中包括了三個要載入的區段：.text、.data、.bss
+	  ，以及 symblo table 與 string table。</para>
       </listitem>
 
       <listitem>
         <para><acronym>COFF</acronym></para>
 
-        <para>The SVR3 object format.  The header now comprises a
-          section table, so you can have more than just .text, .data,
-          and .bss sections.</para>
+        <para>SVR3 的 object 檔格式。  其 header 現在由 section table 所組成，
+	  所以可以同時包含 .text、.data、.bss 以及其他的區段。</para>
       </listitem>
 
       <listitem>
         <para>&man.elf.5;</para>
 
-        <para>The successor to <acronym>COFF</acronym>, featuring
-          multiple sections and 32-bit or 64-bit possible values.  One
-          major drawback: <acronym>ELF</acronym> was also designed
-          with the assumption that there would be only one ABI per
-          system architecture.  That assumption is actually quite
-          incorrect, and not even in the commercial SYSV world (which
-          has at least three ABIs: SVR4, Solaris, SCO) does it hold
-          true.</para>
+        <para>前身為 <acronym>COFF</acronym>，其特色在於可擁有多區段，
+	  並可使用 32-bit 或 64-bit 的數值範圍。 但它有個主要缺點：
+	  <acronym>ELF</acronym> 在設計之初，假設每個系統架構都只有一種 ABI，
+	  然而事實上這假設犯了相當大的錯誤，甚至在 SYSV 商業環境都是錯誤
+	  (他們至少都有三種 ABI：SVR4、Solaris、SCO)。</para>
 
-        <para>FreeBSD tries to work around this problem somewhat by
-          providing a utility for <emphasis>branding</emphasis> a
-          known <acronym>ELF</acronym> executable with information
-          about the ABI it is compliant with.  See the manual page for
-          &man.brandelf.1; for more information.</para>
+        <para>&os; 試圖透過提供一項工具來解決此一問題，
+	  該工具可 <emphasis>branding(標幟)</emphasis> 出該
+	  <acronym>ELF</acronym> 所相容的 ABI 訊息。  細節部分請參閱
+	  &man.brandelf.1; 說明。</para>
       </listitem>
     </itemizedlist>
 

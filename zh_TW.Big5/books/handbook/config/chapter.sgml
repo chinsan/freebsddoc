@@ -1622,15 +1622,13 @@ cron.*                                          /var/log/cron
       <indexterm><primary>sysctl.conf</primary></indexterm>
       <indexterm><primary>sysctl</primary></indexterm>
 
-      <para><filename>sysctl.conf</filename> looks much like
-	<filename>rc.conf</filename>.  Values are set in a
-	<literal>variable=value</literal>
-	form.  The specified values are set after the system goes into
-	multi-user mode.  Not all variables are settable in this mode.</para>
+      <para><filename>sysctl.conf</filename> 的內容與 <filename>rc.conf</filename>
+	非常類似。 變數設定格式都是 <literal>變數=數值</literal>。
+	指定變更的變數將在系統進入多使用者模式後套用。
+	然而，在此模式中，並不是所有的變數都可以被變更的。</para>
 
-      <para>A sample <filename>sysctl.conf</filename> turning off logging
-	of fatal signal exits and letting Linux programs know they are really
-	running under &os;:</para>
+      <para>範例中的 <filename>sysctl.conf</filename> 關閉程式終止的錯誤信號，
+	並讓 Linux 程式得知它們是在 &os; 下運作：</para>
 
       <programlisting>kern.logsigexit=0       # Do not log fatal signal exits (e.g. sig 11)
 compat.linux.osname=&os;
@@ -1639,7 +1637,7 @@ compat.linux.osrelease=4.3-STABLE</programlisting>
   </sect1>
 
   <sect1 id="configtuning-sysctl">
-    <title>Tuning with sysctl</title>
+    <title>以 sysctl 微調系統</title>
 
     <indexterm><primary>sysctl</primary></indexterm>
     <indexterm>
@@ -1647,42 +1645,36 @@ compat.linux.osrelease=4.3-STABLE</programlisting>
       <secondary>with sysctl</secondary>
     </indexterm>
 
-    <para>&man.sysctl.8; is an interface that allows you to make changes
-      to a running &os; system.  This includes many advanced
-      options of the TCP/IP stack and virtual memory system that can
-      dramatically improve performance for an experienced system
-      administrator.  Over five hundred system variables can be read
-      and set using &man.sysctl.8;.</para>
+    <para>&man.sysctl.8; 可讓系統管理者對運行中的 &os; 系統進行調整。
+      其提供許多進階選項給熟練的系統管理者，包含 TCP/IP
+      堆疊，虛擬記憶體管理等影響系統效能甚鉅的選項。
+      &man.sysctl.8; 可讀寫超過五百個系統調校變數。</para>
 
-    <para>At its core, &man.sysctl.8; serves two functions: to read and
-      to modify system settings.</para>
+    <para>&man.sysctl.8; 提供兩項系統設定功能：讀取、寫入。</para>
 
-    <para>To view all readable variables:</para>
+    <para>檢視所有可讀取的系統選項變數:</para>
 
     <screen>&prompt.user; <userinput>sysctl -a</userinput></screen>
 
-    <para>To read a particular variable, for example,
-      <varname>kern.maxproc</varname>:</para>
+    <para>檢視特定系統選項變數，例如 <varname>kern.maxproc</varname>：</para>
 
     <screen>&prompt.user; <userinput>sysctl kern.maxproc</userinput>
 kern.maxproc: 1044</screen>
 
-    <para>To set a particular variable, use the intuitive
+    <para>欲設定特定變數，可使用
       <replaceable>variable</replaceable>=<replaceable>value</replaceable>
-      syntax:</para>
+      這種直覺式的語法：</para>
 
     <screen>&prompt.root; <userinput>sysctl kern.maxfiles=5000</userinput>
 kern.maxfiles: 2088 -&gt; 5000</screen>
 
-    <para>Settings of sysctl variables are usually either strings,
-      numbers, or booleans (a  boolean being <literal>1</literal> for yes
-      or a <literal>0</literal> for no).</para>
+    <para>sysctl 的變數格式通常是字串、數字，或是布林值（<literal>1</literal>
+      代表 yes，<literal>0</literal> 代表 no）。</para>
 
-    <para>If you want to set automatically some variables each time
-      the machine boots, add them to the
-      <filename>/etc/sysctl.conf</filename> file.  For more information
-      see the &man.sysctl.conf.5; manual page and the
-      <xref linkend="configtuning-sysctlconf">.</para>
+    <para>如果你想讓系統在開機後就自動設定好某些變數，可將它們加進
+      <filename>/etc/sysctl.conf</filename> 檔案。
+      檢視 &man.sysctl.conf.5; 手冊頁面與
+      <xref linkend="configtuning-sysctlconf"> 可取得更豐富的資訊。</para>
 
   <sect2 id="sysctl-readonly">
     <sect2info>
@@ -1722,7 +1714,7 @@ device_probe_and_attach: cbb0 attach returned 12</screen>
   </sect1>
 
   <sect1 id="configtuning-disk">
-    <title>Tuning Disks</title>
+    <title>硬碟效能調校(Tuning)</title>
 
     <sect2>
       <title>Sysctl Variables</title>
@@ -1883,156 +1875,138 @@ device_probe_and_attach: cbb0 attach returned 12</screen>
       <indexterm><primary>Soft Updates</primary></indexterm>
       <indexterm><primary>tunefs</primary></indexterm>
 
-      <para>The &man.tunefs.8; program can be used to fine-tune a
-	file system.  This program has many different options, but for
-	now we are only concerned with toggling Soft Updates on and
-	off, which is done by:</para>
+      <para>&man.tunefs.8; 這個程式可以用來調校檔案系統。
+        這個程式有相當多的選項，
+        但現在我們只需要關心如何開啟與關閉 Soft Updates，
+        其透過下列指令完成：</para>
 
       <screen>&prompt.root; <userinput>tunefs -n enable /filesystem</userinput>
 &prompt.root; <userinput>tunefs -n disable /filesystem</userinput></screen>
 
-      <para>A filesystem cannot be modified with &man.tunefs.8; while
-	it is mounted.  A good time to enable Soft Updates is before any
-	partitions have been mounted, in single-user mode.</para>
+      <para>在檔案系統被掛載期間，是無法透過 &man.tunefs.8; 來修改的。
+        一個好的啟動 Soft Updates 時機是在任何分割區被掛載前，
+        也就是在 single-user mode 下。</para>
 
-      <para>Soft Updates drastically improves meta-data performance, mainly
-        file creation and deletion, through the use of a memory cache.  We
-        recommend to use Soft Updates on all of your file systems.  There
-        are two downsides to Soft Updates that you should be aware of:  First,
-        Soft Updates guarantees filesystem consistency in the case of a crash
-        but could very easily be several seconds (even a minute!) behind
-        updating the physical disk.  If your system crashes you may lose more
-        work than otherwise.  Secondly, Soft Updates delays the freeing of
-        filesystem blocks.  If you have a filesystem (such as the root
-	filesystem) which is almost full, performing a major update, such as
-        <command>make installworld</command>, can cause the filesystem to run
-	out of space and the update to fail.</para>
+      <para>Soft Updates 透過使用記憶體快取，
+        主要是在檔案建立和刪除方面，大大地增加了 meta-data 的效能。
+        我們建議在你的所有檔案系統使用 Soft Updates。
+        但使用 Soft Updates 有兩項缺點是你必須注意的：
+        第一，Soft Updates 保證檔案系統在發生系統崩潰前後的資料一致性，
+        但很有可能在系統崩潰前幾秒鐘 (甚至是一分鐘！) 的資料並沒有真正寫入實體硬碟中。
+        一旦發生系統崩潰，你可能會比未開啟的狀態下遺失更多工作資料。
+        第二，Soft Updates 會延遲釋放掉檔案系統的 block。
+        假如你在有一個檔案系統 (例如 root filesystem) 快滿了的情況下，進行了主要系統升級，例如
+        <command>make installworld</command>，這可能導致檔案系統的空間被用完，
+        進而使得資料更新失敗。</para>
 
       <sect3>
-	<title>More Details about Soft Updates</title>
+	<title>Soft Updates 的更多細節</title>
 
 	<indexterm>
 	  <primary>Soft Updates</primary>
 	  <secondary>details</secondary>
 	</indexterm>
 
-	<para>There are two traditional approaches to writing a file
-	  systems meta-data back to disk.  (Meta-data updates are
-	  updates to non-content data like inodes or
-	  directories.)</para>
+	<para>有兩種傳統方法將檔案系統的 meta-data 寫回硬碟。
+          (Meta-data 的更新指的是更新像 inodes 或目錄這些沒有實際內容的數據)</para>
 
-	<para>Historically, the default behavior was to write out
-	  meta-data updates synchronously.  If a directory had been
-	  changed, the system waited until the change was actually
-	  written to disk.  The file data buffers (file contents) were
-	  passed through the buffer cache and backed up
-	  to disk later on asynchronously.  The advantage of this
-	  implementation is that it operates safely.  If there is
-	  a failure during an update, the meta-data are always in a
-	  consistent state.  A file is either created completely
-	  or not at all.  If the data blocks of a file did not find
-	  their way out of the buffer cache onto the disk by the time
-	  of the crash, &man.fsck.8; is able to recognize this and
-	  repair the filesystem by setting the file length to
-	  0.  Additionally, the implementation is clear and simple.
-	  The disadvantage is that meta-data changes are slow.  An
-	  <command>rm -r</command>, for instance, touches all the files
-	  in a directory sequentially, but each directory
-	  change (deletion of a file) will be written synchronously
-	  to the disk.  This includes updates to the directory itself,
-	  to the inode table, and possibly to indirect blocks
-	  allocated by the file.  Similar considerations apply for
-	  unrolling large hierarchies (<command>tar -x</command>).</para>
+	<para>以往，預設的做法是同步進行 meta-data 的更新。
+          若有一個目錄被更動了，則系統會一直等待直到這個更動真正寫到硬碟中。
+          檔案的 data buffers (檔案內容) 則會透過 buffer cache，
+          在之後非同步地寫回硬碟。
+          這樣實作的好處是可以確保這項操作是安全的。
+          假如在更新期間發生錯誤，可以確保 meta-data 處於一致的狀態。
+          檔案不是完整地建立便是沒有建立。
+          如果在系統崩潰時，使得 buffer cache 無法完整寫入到該檔案在硬碟中的 data blocks，
+          &man.fsck.8; 能夠檢查出並透過將其檔案長度設為 0 來修復檔案系統。
+          除此之外，這個作法實作起來即清楚又簡單。
+          但缺點是 meta-data 的更新很慢。例如
+          <command>rm -r</command> 會依序觸及該目錄下的所有檔案，
+          但每項目錄更動 (檔案的刪除) 都會同步寫回硬碟中。
+          這包括了目錄本身、inode table 的更新，
+          可能還包括該檔案配置的 indirect blocks。
+          同樣的問題也出現在解開大的階層式檔案的情況 (<command>tar -x</command>)。</para>
 
-	<para>The second case is asynchronous meta-data updates.  This
-  	  is the default for Linux/ext2fs and
-  	  <command>mount -o async</command> for *BSD ufs.  All
-  	  meta-data updates are simply being passed through the buffer
-  	  cache too, that is, they will be intermixed with the updates
-  	  of the file content data.  The advantage of this
-  	  implementation is there is no need to wait until each
-  	  meta-data update has been written to disk, so all operations
-  	  which cause huge amounts of meta-data updates work much
-  	  faster than in the synchronous case.  Also, the
-  	  implementation is still clear and simple, so there is a low
-  	  risk for bugs creeping into the code.  The disadvantage is
-  	  that there is no guarantee at all for a consistent state of
-  	  the filesystem.  If there is a failure during an operation
-  	  that updated large amounts of meta-data (like a power
-  	  failure, or someone pressing the reset button),
-	  the filesystem
-  	  will be left in an unpredictable state.  There is no opportunity
-  	  to examine the state of the filesystem when the system
-  	  comes up again; the data blocks of a file could already have
-  	  been written to the disk while the updates of the inode
-  	  table or the associated directory were not.  It is actually
-  	  impossible to implement a <command>fsck</command> which is
-  	  able to clean up the resulting chaos (because the necessary
-  	  information is not available on the disk).  If the
-	  filesystem has been damaged beyond repair, the only choice
-	  is to use &man.newfs.8; on it and restore it from backup.
-	  </para>
+	<para>
+          第二種作法是非同步 meta-data 更新。
+          這是 Linux/ext2fs 預設使用的作法，在 *BSD ufs 利用
+          <command>mount -o async</command> 指令也能使用。
+          所有的 meta-data 更新也透過 buffer cache 來傳送，
+          也就是它們會被混合在檔案內容的資料更新中。
+          這樣實作的好處是不需要等待 meta-data 更新被寫回硬碟，
+          所以所有可能導致大量 meta-data 更新的操作會比同步的方式來得更快。
+          同樣地，這個作法的實作仍然是清楚且簡單的，
+          所以，原始碼中產生漏洞的風險很低。
+          缺點是其不保證檔案系統的資料一致性。
+          如果在更新大量 meta-data 的期間發生了錯誤
+          (例如斷電或有人按下了重開鈕)，
+          檔案系統會處於不可預知的狀態。
+          當系統重新啟動後將沒有機會去檢查檔案系統的狀態；
+          可能發生檔案的 data blocks 已經寫回硬碟，
+          但 inode table 或相關的目錄更新卻沒有的情形。
+          實際上也沒有辦法利用 <command>fsck</command> 來清理
+          (因為必要的資訊已經無法從硬碟中取得了)。
+          如果文件系統在修復後損壞了，
+          唯一的選擇便是使用 &man.newfs.8; 並且利用備份來回復。
+          </para>
 
-	<para>The usual solution for this problem was to implement
-	  <emphasis>dirty region logging</emphasis>, which is also
-	  referred to as <emphasis>journaling</emphasis>, although that
-	  term is not used consistently and is occasionally applied
-	  to other forms of transaction logging as well.  Meta-data
-	  updates are still written synchronously, but only into a
-	  small region of the disk.  Later on they will be moved
-	  to their proper location.  Because the logging
-	  area is a small, contiguous region on the disk, there
-	  are no long distances for the disk heads to move, even
-	  during heavy operations, so these operations are quicker
-	  than synchronous updates.
-	  Additionally the complexity of the implementation is fairly
-	  limited, so the risk of bugs being present is low.  A disadvantage
-	  is that all meta-data are written twice (once into the
-	  logging region and once to the proper location) so for
-	  normal work, a performance <quote>pessimization</quote>
-	  might result.  On the other hand, in case of a crash, all
-	  pending meta-data operations can be quickly either rolled-back
-	  or completed from the logging area after the system comes
-	  up again, resulting in a fast filesystem startup.</para>
+        <para>針對這個問題，一般的解法是實作
+          <emphasis>dirty region logging</emphasis>
+          也被稱做 <emphasis>journaling</emphasis>，
+          儘管它的名稱不太一致，而且偶爾還會被以為是
+          transaction logging 的其他型式。
+          在這種解法中，meta-data 更新依然是同步地寫回硬碟，
+          唯一的不同是它們是寫到硬碟中的一個小區域裡。
+          稍後再被移到適當的位置。
+          因為做 logging 的區域是硬碟中一塊小且連續的區域，
+          對於硬碟的讀寫頭來說，不須移動很長的距離，
+          即使是在進行繁重操作的期間亦同，
+          所以這些操作運行起來比同步更新的方式快。
+          除此之外，它的實作複雜度有限，
+          所以出錯的風險也很低。
+          缺點是所有的 meta-data 都必須寫入兩次
+          (一次寫到 logging region，另一次寫到硬碟適當的位置)，
+          所以對正常的工作來說，可能導致 performance <quote>pessimization</quote> (效能劣化)。
+          另一方面，如果發生系統崩潰，
+          在系統重新啟動後，
+          所有尚未完成的 meta-data 操作可以很快地從 logging area 回復或完成，
+          進而加速檔案系統的啟動。</para>
 
-	<para>Kirk McKusick, the developer of Berkeley FFS,
-	   solved this problem with Soft Updates: all pending
-	   meta-data updates are kept in memory and written out to disk
-	   in a sorted sequence (<quote>ordered meta-data
-	   updates</quote>).  This has the effect that, in case of
-	   heavy meta-data operations, later updates to an item
-	   <quote>catch</quote> the earlier ones if the earlier ones are still in
-	   memory and have not already been written to disk.  So all
-	   operations on, say, a directory are generally performed in
-	   memory before the update is written to disk (the data
-	   blocks are sorted according to their position so
-	   that they will not be on the disk ahead of their meta-data).
-	   If the system crashes, this causes an implicit <quote>log
-	   rewind</quote>: all operations which did not find their way
-	   to the disk appear as if they had never happened.  A
-	   consistent filesystem state is maintained that appears to
-	   be the one of 30 to 60 seconds earlier.  The
-	   algorithm used guarantees that all resources in use
-	   are marked as such in their appropriate bitmaps: blocks and inodes.
-	   After a crash, the only resource allocation error
-	   that occurs is that resources are
-	   marked as <quote>used</quote> which are actually <quote>free</quote>.
-	   &man.fsck.8; recognizes this situation,
-	   and frees the resources that are no longer used.  It is safe to
-	   ignore the dirty state of the filesystem after a crash by
-	   forcibly mounting it with <command>mount -f</command>.  In
-	   order to free resources that may be unused, &man.fsck.8;
-	   needs to be run at a later time.  This is the idea behind
-	   the <emphasis>background fsck</emphasis>: at system startup
-	   time, only a <emphasis>snapshot</emphasis> of the
-	   filesystem is recorded.  The <command>fsck</command> can be
-	   run later on.  All file systems can then be mounted
-	   <quote>dirty</quote>, so the system startup proceeds in
-	   multiuser mode.  Then, background <command>fsck</command>s
-	   will be scheduled for all file systems where this is required, to free
-	   resources that may be unused.  (File systems that do not use
-	   Soft Updates still need the usual foreground
-	   <command>fsck</command> though.)</para>
+        <para>Kirk McKusick, Berkeley FFS 的開發者，
+          利用 Soft Updates 解決了這個問題：
+          所有的未完成的 meta-data 更新都保留在記憶體，按照排列的順序依序寫回硬碟中
+          (<quote>有序的 meta-data 更新</quote>)。
+          這樣的結果是，在繁重的 meta-data 操作中，
+          對於同一個 item，如果先前的更新仍然在記憶體中，
+          而尚未寫入到硬碟中，
+          後面的更新會 <quote>捕捉</quote> 到先前的更新。
+          所以在更新寫入到硬碟之前，
+          所有的操作，比如說，目錄的操作一般會在記憶體中執行
+          (data blocks 會依照它們的位置做排序，
+          不會比 meta-update 還早寫入到硬碟)
+          如果發生系統崩潰，會導致一個隱性的
+          <quote>log rewind</quote>：
+          所有出現錯誤不知道如何寫入硬碟的操作就像它們從未發生一樣。
+          檔案系統和 30 至 60 秒前的狀態維持一致。
+          其使用的演算法保證所有正被使用中的資源，例如：blocks 和 inodes
+          會被標記在它們的 bitmaps 裡。
+          在系統崩潰後，唯一的資源配置錯誤會發生在那些
+          被標記成 <quote>used</quote> 但實際上是 <quote>free</quote> 的資源中。
+          &man.fsck.8; 會檢查出這種情況，
+          並且釋放這些不再被使用的資源。
+          對於在系統崩潰後使用 <command>mount -f</command> 來強制掛載的檔案系統，
+          忽略其 dirty state 是安全的。
+          為了釋放那些可能沒被使用的資源，&man.fsck.8;
+          需要過一段時間後再執行。
+          這個想法稱為 <emphasis>background fsck</emphasis>：
+          在系統啟動的時候，只對檔案系統記下當時的 <emphasis>snapshot</emphasis>。
+          <command>fsck</command> 便可以過一段時間再執行。
+          因為所有的檔案系統都可以在 <quote>dirty</quote> 的狀態下掛載，
+          所以系統可以啟動在多使用者模式下。
+          然後，為了釋放不再被使用的資源，
+          background <command>fsck</command> 會被加入排程。
+          (然而未使用 Soft Updates 的檔案系統仍然需要一般的 foreground
+          <command>fsck</command>)</para>
 
 	 <para>The advantage is that meta-data operations are nearly as
 	   fast as asynchronous updates (i.e. faster than with
@@ -2353,81 +2327,76 @@ kern.maxvnodes: 100000</programlisting>
   </sect1>
 
   <sect1 id="adding-swap-space">
-    <title>Adding Swap Space</title>
+    <title>擴充 swap 空間</title>
 
-    <para>No matter how well you plan, sometimes a system does not run
-      as you expect.  If you find you need more swap space, it is
-      simple enough to add.  You have three ways to increase swap
-      space: adding a new hard drive, enabling swap over NFS, and
-      creating a swap file on an existing partition.</para>
+    <para>無論你有多麼周全的計畫，有時系統運作狀況仍會超出你的預期。
+      如果你發現系統需要更多的 swap 空間，擴充 swap 的步驟是很簡單的。
+      有三種方法可以擴充 swap 空間：增加磁碟機、透過 NFS 擴充 swap
+      、在現有的磁碟分割中建立 swap 檔。</para>
 
-    <para>For information on how to encrypt swap space, what options
-      for this task exist and why it should be done, please refer to
-      <xref linkend="swap-encrypting"> of the Handbook.</para>
+    <para>如果你想將 swap 空間加密，使用手冊裡的
+      <xref linkend="swap-encrypting">
+      提供了更多資訊，例如可用選項，以及為何要這麼作。</para>
 
     <sect2 id="new-drive-swap">
-      <title>Swap on a New Hard Drive</title>
+      <title>以新磁碟機擴充 swap 空間</title>
 
-      <para>The best way to add swap, of course, is to use this as an
-	excuse to add another hard drive.  You can always use another
-	hard drive, after all.  If you can do this, go reread the
-	discussion of swap space
-	in <xref linkend="configtuning-initial">
-	of the Handbook for some suggestions on how to best
-	arrange your swap.</para>
+      <para>當然，最好的方法就是用新的磁碟機來擴充 swap 空間。
+        你可以重複的增加新磁碟機來，並用以擴充 swap 空間。
+        如果你打算這麼作，請重新閱讀使用手冊中的
+        <xref linkend="configtuning-initial">
+        ，裡面關於 swap 空間的討論可作為 swap 空間配置最佳化的建議。</para>
     </sect2>
 
     <sect2 id="nfs-swap">
-      <title>Swapping over NFS</title>
+      <title>透過 NFS 擴充 swap</title>
 
-      <para>Swapping over NFS is only recommended if you do not have a
-	local hard disk to swap to; NFS swapping will be limited
-	by the available network bandwidth and puts an additional
-	burden on the NFS server.</para>
+      <para>除非你已經沒有本地端的磁碟空間可被拿來當 swap
+        ，否則我們並不建議透過 NFS 擴充 swap 。
+        透過 NFS 擴充 swap 會讓 swap 運作效能受限於網路頻寬，並額外加重
+        NFS 伺服器的負擔。</para>
     </sect2>
 
     <sect2 id="create-swapfile">
-      <title>Swapfiles</title>
+      <title>建立 swap 檔案</title>
 
-      <para>You can create a file of a specified size to use as a swap
-	file.  In our example here we will use a 64MB file called
-	<filename>/usr/swap0</filename>.  You can use any name you
-	want, of course.</para>
+      <para>你可以建立特定大小的檔案，並使用這個檔案來擴充 swap 空間。
+        在以下的範例中，我們建立 64MB 的 swap 檔，並存放為
+        <filename>/usr/swap0</filename> 。
+        當然，你可以任意指定檔案大小與存放位置。</para>
 
       <example>
-        <title>Creating a Swapfile on &os;</title>
+        <title>在 &os; 建立 swap 檔案</title>
 
       <orderedlist>
 	<listitem>
-	  <para>Be certain that your kernel configuration includes
-	    the memory disk driver (&man.md.4;).  It is default in
-	    <filename>GENERIC</filename> kernel.</para>
+	  <para>確定系統核心設定檔中包含記憶體磁碟驅動程式（&man.md.4;）。
+	    該驅動程式在 <filename>GENERIC</filename> 核心設定檔中是預設被編譯的。</para>
 
 	  <programlisting>device   md   # Memory "disks"</programlisting>
 	</listitem>
 
 	<listitem>
-	  <para>Create a swapfile (<filename>/usr/swap0</filename>):</para>
+	  <para>建立 swap 檔案（<filename>/usr/swap0</filename>）：</para>
 
 	  <screen>&prompt.root; <userinput>dd if=/dev/zero of=/usr/swap0 bs=1024k count=64</userinput></screen>
 	</listitem>
 
 	<listitem>
-	  <para>Set proper permissions on (<filename>/usr/swap0</filename>):</para>
+	  <para>設定適當的檔案權限（<filename>/usr/swap0</filename>）：</para>
 
 	  <screen>&prompt.root; <userinput>chmod 0600 /usr/swap0</userinput></screen>
 	</listitem>
 
 	<listitem>
-	  <para>Enable the swap file in <filename>/etc/rc.conf</filename>:</para>
+	  <para>在 <filename>/etc/rc.conf</filename> 啟用 swap 檔案：</para>
 
 	  <programlisting>swapfile="/usr/swap0"   # Set to name of swapfile if aux swapfile desired.</programlisting>
 	</listitem>
 
 	<listitem>
 
-	  <para>Reboot the machine or to enable the swap file immediately,
-            type:</para>
+	  <para>重新開機，或輸入以下指令馬上啟用 swap 檔案：</para>
 
 	  <screen>&prompt.root; <userinput>mdconfig -a -t vnode -f /usr/swap0 -u 0 &amp;&amp; swapon /dev/md0</userinput></screen>
         </listitem>

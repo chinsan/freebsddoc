@@ -143,52 +143,51 @@
 
       <para>有些語言並非採用 ASCII 編碼，可能是： 8-bit、wide
 	或 multibyte 字元，詳情請參閱 &man.multibyte.3;。
-	較古早的程式可能無法正確判別、或誤判為特殊控制字元。而較新的程式都可以辨認
-	8-bit 字元。  由於各程式的作法不一，使用者可能需要在編譯程式時，加上
-	wide 或 multibyte 字元的支援設定，或是正確調整才行。
-	要輸入、處理 wide 或 multibyte 字元的話，可多多利用 <ulink 
-	url="&url.base;/ports/index.html">FreeBSD Ports Collection</ulink> 內有各國語言版本的程式。
+	較古早的程式可能無法正確判別、或誤判為特殊控制字元。
+	而較新的程式都可以辨認 8-bit 字元。  由於各程式的作法不一，
+	使用者可能需要在編譯程式時，加上 wide 或 multibyte 字元的支援設定，
+	或是正確調整才行。  若要輸入、處理 wide 或 multibyte 字元的話，
+	可多多利用 <ulink 
+	url="&url.base;/ports/index.html">FreeBSD Ports Collection</ulink>
+	內有各國語言版本的程式。
 	詳情請參閱 FreeBSD 各 port 中的 I18N 相關文件。</para>
 
-      <para>Specifically, the user needs to look at the application
-	documentation to decide on how to configure it correctly or to
-	pass correct values into the configure/Makefile/compiler.</para>
+      <para>請注意，使用者可能需要查閱應用程式的相關文件，以確定如何正確設定，
+	或者需要在 configure/Makefile/compiler 指定哪些正確的參數才可。</para>
 
-      <para>Some things to keep in mind are:</para>
+      <para>請記住下面這些分別：</para>
 
       <itemizedlist>
 	<listitem>
-	  <para>Language specific single C chars character sets
-	  (see &man.multibyte.3;), e.g.
-	    ISO8859-1, ISO8859-15, KOI8-R, CP437.</para>
+	  <para>某些語系是採單一 C 字元集(請參閱  &man.multibyte.3;)，比如：
+	    ISO8859-1、ISO8859-15、KOI8-R、CP437。</para>
 	</listitem>
 
 	<listitem>
-	  <para>Wide or multibyte encodings, e.g. EUC, Big5.</para>
+	  <para>Wide 或 multibyte 編碼，比如：EUC、Big5。</para>
 	</listitem>
       </itemizedlist>
 
-      <para>You can check the active list of character sets at the
-	<ulink
-	url="http://www.iana.org/assignments/character-sets">IANA Registry</ulink>.</para>
+      <para>此外，也可以在 <ulink
+	url="http://www.iana.org/assignments/character-sets">IANA Registry</ulink>
+	這邊檢閱所有現行的字元集列表。</para>
 
       <note>
-      <para>&os; use X11-compatible locale encodings instead.</para>
+      <para>&os; 是採用與 X11 標準相容的 locale 編碼模式。</para>
       </note>
 
     </sect2>
 
     <sect2>
-      <title>I18N Applications</title>
+      <title>I18N 應用程式</title>
 
-      <para>In the FreeBSD Ports and Package system, I18N applications
-	have been named with <literal>I18N</literal> in their names for
-	easy identification.  However, they do not always support the
-	language needed.</para>
+      <para>在 FreeBSD 的 Ports 及 Package 系統中，I18N 應用程式名稱中會
+	有 <literal>I18N</literal> 字樣以供辨識。但是，這並不保證其含有您
+	想使用的語言。</para>
     </sect2>
 
     <sect2 id="setting-locale">
-      <title>Setting Locale</title>
+      <title>設定 Locale</title>
 
       <para>Usually it is sufficient to export the value of the locale name
         as <envar>LANG</envar> in the login shell.  This could be done in
@@ -200,8 +199,7 @@
 	refer to language-specific FreeBSD documentation for more
 	information.</para>
 
-      <para>You should set the following two environment variables in your configuration
-	files:</para>
+      <para>您應該在您的環境設定檔設定下面兩個環境變數：</para>
 
       <itemizedlist>
         <indexterm><primary>POSIX</primary></indexterm>
@@ -895,12 +893,11 @@ Option "XkbOptions"  "grp:toggle"</programlisting>
     </sect2>
 
     <sect2>
-      <title>Non-English FreeBSD Documentation</title>
+      <title>非英語 FreeBSD 文件</title>
 
-      <para>Some FreeBSD contributors have translated parts of FreeBSD to
-	other languages.  They are available through links on the <ulink
-	url="&url.base;/index.html">main site</ulink> or in
-	<filename>/usr/share/doc</filename>.</para>
+      <para>某些 FreeBSD 貢獻者翻譯了部分 FreeBSD 文件成其他語言。
+	這些文件都可以在<ulink url="&url.base;/index.html">這裡</ulink>或從 
+	<filename>/usr/share/doc</filename> 取得。</para>
     </sect2>
   </sect1>
 </chapter>

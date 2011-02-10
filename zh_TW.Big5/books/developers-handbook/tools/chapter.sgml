@@ -478,7 +478,7 @@
 	  <para>告訴 gcc 在連結(linking)程式時你需要用到的函式庫名稱。</para>
 
 	  <para>最常見的情況就是，當你在程式中使用了 C 數學函式庫，
-	    跟其他作業平台不一樣的是，這函示學函式都不在標準函式庫(library)中，
+	    跟其他作業平台不一樣的是，這些函式都不在標準函式庫(library)中，
 	    因此編譯器並不知道這函式庫名稱，你必須告訴編譯器要加上它才行。</para>
 
 	  <para>規則很簡單，如果有個函式庫叫做 <filename>lib<replaceable>something</replaceable>.a</filename>，

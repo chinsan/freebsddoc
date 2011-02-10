@@ -79,12 +79,13 @@
       而以動態載入或卸載相關的 kernel module。
       這使得 kernel 能夠快速因應新的環境而作調整
       (有點像是：筆記型電腦上的 PCMCIA 卡一樣即插即用)
-      ，或是增加其他原本的預設 kernel(<filename>GENERIC</filename>)所沒有的功能。
-      這種模式，就叫做 modular kernel(核心模組)。</para>
+      ，或是增加其他原本的預設 kernel(<filename>GENERIC</filename>)
+      所沒有的功能。  這種模式，就叫做 modular kernel(核心模組)。</para>
 
-    <para>儘管如此，還是有一些功能仍須編譯在 kernel 內才行。因為有時候是因為這些功能與 kernel 
-      結合的相當複雜緊密，而無法將它們弄成可動態載入的 module
-      ；而有時候，則是因為沒有人有空來弄那些 kernel module 的實作。</para>
+    <para>儘管如此，還是有一些功能仍須編譯在 kernel 內才行。
+      因為有時候是因為這些功能與 kernel 結合的相當複雜緊密，
+      而無法將它們弄成可動態載入的 module；
+      有時候，則是因為沒有人有空來弄那些 kernel module 的實作。</para>
 
     <para>重新調配、編譯 kernel 幾乎是每位 BSD 使用者所必須經歷的過程。
       儘管這項工作可能比較耗時，但在 &os; 的使用上會有許多好處。
@@ -478,67 +479,65 @@ cpu          I686_CPU</programlisting>
 
     <programlisting>options          SCHED_4BSD         # 4BSD scheduler</programlisting>
 
-    <para>&os;. 傳統所用(並且是預設)的系統 CPU scheduler。  若您不清楚要如何設定
+    <para>&os; 傳統所用(並且是預設)的系統 CPU scheduler。  若您不清楚要如何設定
       ，請保留這設定。</para>
 
     <programlisting>options          PREEMPTION         # Enable kernel thread preemption</programlisting>
 
-    <para>Allows threads that are in the kernel to be preempted
-      by higher priority threads.  It helps with interactivity and
-      allows interrupt threads to run sooner rather than waiting.</para>
+    <para>允許 kernel 裡的 thread 被具有更高優先權的 thread 先佔。
+	  <footnote>
+	  <para>譯註：例如 thread A 正在 kernel 裡執行，此時若 thread B 也想執行，
+	  且 thread B 具有比 thread A 更高的優先權，則開啟此選項可允許 kernel 
+	  中斷 thread A，先執行 thread B。</para>
+	  </footnote>
+	  此選項對互動的操作<footnote><para>譯註：例如圖型介面操作。</para>
+	  </footnote>有幫助，且可讓等待中的 thread 較快被執行。</para>
 
     <programlisting>options          INET              # InterNETworking</programlisting>
 
-    <para>Networking support.  Leave this in, even if you do not plan to
-      be connected to a network.  Most programs require at least loopback
-      networking (i.e., making network connections within your PC), so
-      this is essentially mandatory.</para>
+    <para>網路支援。請保留它，即使您沒有打算連接網路。許多程式需要 loopback networking
+      （如連線到你自己的電腦），所以基本上這個選項是必要的。</para>
 
     <programlisting>options          INET6             # IPv6 communications protocols</programlisting>
 
-    <para>This enables the IPv6 communication protocols.</para>
+    <para>IPv6 通訊協定的支援。</para>
 
     <programlisting>options          FFS               # Berkeley Fast Filesystem</programlisting>
 
-    <para>This is the basic hard drive file system.  Leave it in if you
-      boot from the hard disk.</para>
+    <para>基本的硬碟檔案系統，如果您要從硬碟開機，請保留它。</para>
 
     <programlisting>options          SOFTUPDATES       # Enable FFS Soft Updates support</programlisting>
 
-    <para>This option enables Soft Updates in the kernel, this will
-      help speed up write access on the disks.  Even when this
-      functionality is provided by the kernel, it must be turned on
-      for specific disks.  Review the output from &man.mount.8; to see
-      if Soft Updates is enabled for your system disks.  If you do not
-      see the <literal>soft-updates</literal> option then you will
-      need to activate it using the &man.tunefs.8; (for existing
-      file systems) or &man.newfs.8; (for new file systems)
-      commands.</para>
+    <para>此選項開啟 kernel 支援的 Soft Updates，Soft Updates 能加速磁碟的寫入
+	  效能。開啟此選項後，別忘了每個磁碟都要各別指定才會生效。請檢查
+	  &man.mount.8; 指令的輸出來查看磁碟的 Soft Updates 是否開啟。如果您沒看到
+	  任何 <literal>soft-updates</literal> 字樣，您可使用 &man.tunefs.8; 指令
+	  來開啟已存在檔案系統的 Soft Updates，或使用 &man.newfs.8; 指令來開啟新
+	  檔案系統的 Soft Updates。<footnote><para>譯註：由於 Soft Updates 設計用
+	  於檔案系統層，所以這裡提到的磁碟都是指檔案系統。</para></footnote></para>
 
     <programlisting>options          UFS_ACL           # Support for access control lists</programlisting>
 
-    <para>This option enables kernel support
-      for access control lists.  This relies on the use of extended
-      attributes and <acronym>UFS2</acronym>, and the feature is described
-      in detail in <xref linkend="fs-acl">.  <acronym>ACL</acronym>s are
-      enabled by default and should not be
-      disabled in the kernel if they have been used previously on a file
-      system, as this will remove the access control lists, changing the
-      way files are protected in unpredictable ways.</para>
+	<para>此選項開啟 kernel 支援的「存取控制清單(access control lists, ACL)」
+	  功能。此功能需要用到額外的屬性及 UFS2<footnote><para>譯註：extended 
+	  attributes， 指的是檔案系統中除了權限、擁有者等之外額外的屬性。就譯者的認
+	  知 UFS2 才支援此功能，但 &man.acl.3; 的 HISTORY 一節說明 UFS1 也支援。
+	  </para></footnote>。更詳細的說明請參照<xref linkend="fs-acl">。預設 ACL 
+	  是開啟的，而且如果某個檔案系統過去曾使用過，請千萬別關掉它，否則 ACL 資訊
+	  會被移除，而該檔案的權限可能會變成非預期的。</para>
 
     <programlisting>options          UFS_DIRHASH       # Improve performance on big directories</programlisting>
 
-    <para>This option includes functionality to speed up disk
-      operations on large directories, at the expense of using
-      additional memory.  You would normally keep this for a large
-      server, or interactive workstation, and remove it if you are
-      using &os; on a smaller system where memory is at a premium and
-      disk access speed is less important, such as a firewall.</para>
+	<para>開啟此選項可加速大型目錄<footnote><para>譯註：大型目錄指的是一個目錄
+	  下有極大數量的檔案。</para></footnote>的存取，不過代價是消耗更多的記憶體。
+	  通常在大型 server 或互動的 workstation 上會開啟此選項，而在記憶體少、磁
+	  碟速度較不重要的小型系統上(例如防火牆) 會關閉此選項。</para>
 
     <programlisting>options          MD_ROOT           # MD is a potential root device</programlisting>
 
-    <para>This option enables support for a memory backed virtual disk
-      used as a root device.</para>
+	<para>開啟此選項支援用記憶體磁碟<footnote><para>譯註：記憶體磁碟(memory 
+	  backed virtual disk) 指的是用 memory 來當磁碟裝置，並在其上建立檔案系統
+	  </para></footnote>來當根設備(root device)。</para>
 
     <indexterm>
       <primary>kernel options</primary>
@@ -552,9 +551,8 @@ cpu          I686_CPU</programlisting>
 options          NFSSERVER         # Network Filesystem Server
 options          NFS_ROOT          # NFS usable as /, requires NFSCLIENT</programlisting>
 
-    <para>The network file system.  Unless you plan to mount partitions
-      from a &unix; file server over TCP/IP, you can comment these
-      out.</para>
+    <para>用於網路檔案系統(Network file system)。如果您沒有透過網路從 &unix; 
+	  檔案伺服器掛載(mount) 檔案系統的需求，您可以註解掉它們。</para>
 
     <indexterm>
       <primary>kernel options</primary>
@@ -562,133 +560,122 @@ options          NFS_ROOT          # NFS usable as /, requires NFSCLIENT</progra
     </indexterm>
     <programlisting>options          MSDOSFS           # MSDOS Filesystem</programlisting>
 
-    <para>The &ms-dos; file system.  Unless you plan to mount a DOS formatted
-      hard drive partition at boot time, you can safely comment this out.
-      It will be automatically loaded the first time you mount a DOS
-      partition, as described above.  Also, the excellent
-      <filename role="package">emulators/mtools</filename> software
-      allows you to access DOS floppies without having to mount and
-      unmount them (and does not require <literal>MSDOSFS</literal> at
-      all).</para>
+    <para>MS-DOS 檔案系統。  除非您要在開機時掛載 DOS 格式的硬碟，
+      不然您可以放心的把這行註解掉。  如同前述，在您第一次掛載 DOS 分割區時，
+      kernel 將會自動載入模組來支援它。  此外，
+      <filename role="package">emulators/mtools</filename>
+      這個軟體，可以讓你存取 DOS 磁片，而不需要掛載或卸載軟碟
+      (也不需要 <literal>MSDOSFS</literal> 的支援)。</para>
 
     <programlisting>options          CD9660            # ISO 9660 Filesystem</programlisting>
 
-    <para>The ISO 9660 file system for CDROMs.  Comment it out if you do
-      not have a CDROM drive or only mount data CDs occasionally (since it
-      will be dynamically loaded the first time you mount a data CD).
-      Audio CDs do not need this file system.</para>
+    <para>光碟機所使用的 ISO 9660 檔案系統。  如果沒有光碟機，
+      或是很少用光碟機讀取資料，可以把這一行註解起來(因為 kernel 
+      在第一次掛載時，會自動載入)。  音樂 CD
+      則不會用到這個檔案系統。</para>
 
     <programlisting>options          PROCFS            # Process filesystem(requires PSEUDOFS)</programlisting>
 
-    <para>The process file system.  This is a <quote>pretend</quote>
-      file system mounted on <filename>/proc</filename> which allows
-      programs like &man.ps.1; to give you more information on what
-      processes are running.  Use of <literal>PROCFS</literal>
-      is not required under most circumstances, as most
-      debugging and monitoring tools have been adapted to run without
-      <literal>PROCFS</literal>: installs will not mount this file
-      system by default.</para>
+    <para>process 檔案系統。  這是一個掛在 <filename>/proc</filename> 底下的
+      <quote>假</quote>檔案系統，其作用是允許一些程式，像是 &man.ps.1;
+      來讀取正在執行的 processes 資訊。  大多數情況下是不需要使用到
+      <literal>PROCFS</literal>，
+      因為大多數的偵錯或監控工具，都已不需要透過 <literal>PROCFS</literal>
+      就能運作。  預設安裝也並不會掛載。</para>
 
     <programlisting>options          PSEUDOFS          # Pseudo-filesystem framework</programlisting>
 
-    <para>6.X kernels making use of <literal>PROCFS</literal> must also
-      include support for <literal>PSEUDOFS</literal>.</para>
+    <para>在 6.X kernel 若要用 <literal>PROCFS</literal>，則必須加上
+      <literal>PSEUDOFS</literal> 才行。</para>
 
     <programlisting>options          GEOM_GPT          # GUID Partition Tables.</programlisting>
 
-    <para>This option brings the ability to have a large number of
-      partitions on a single disk.</para>
+    <para>該選項可以讓單一磁碟上使用大量磁碟分割區的支援。</para>
 
     <programlisting>options          COMPAT_43         # Compatible with BSD 4.3 [KEEP THIS!]</programlisting>
 
-    <para>Compatibility with 4.3BSD.  Leave this in; some programs will
-      act strangely if you comment this out.</para>
+    <para>4.3BSD 相容支援。  請保留它，否則某些程式將會無法執行。</para>
 
     <programlisting>options          COMPAT_FREEBSD4   # Compatible with &os;4</programlisting>
 
-    <para>This option is required on &os;&nbsp;5.X &i386; and Alpha systems
-      to support applications compiled on older versions of &os;
-      that use older system call interfaces.  It is recommended that
-      this option be used on all &i386; and Alpha systems that may
-      run older applications; platforms that gained support only in
-      5.X, such as ia64 and &sparc64;, do not require this option.</para>
+    <para>為了支援在舊版 &os;&nbsp;4.X 下所編譯的程式，該選項在 &os;&nbsp;5.X
+      的 &i386; 及 Alpha 版本下需要打開。  建議在所有 &i386; 及 Alpha
+      機器上打開此相容設定，因為可能會需要跑舊的程式。
+      此外，在 5.X 才開始支援的平台，比如 ia64 以及 &sparc64; 平台，
+      就不需要加上此設定了。</para>
 
     <programlisting>options          COMPAT_FREEBSD5   # 與 &os;5 相容</programlisting>
 
-    <para>此行是 &os;&nbsp;6.X 及更新的版本若需支援 &os;&nbsp;5.X
+    <para>該行是 &os;&nbsp;6.X 及更新的版本，若需支援 &os;&nbsp;5.X
       系統呼叫才需要設定。</para>
     
     <programlisting>options          SCSI_DELAY=5000  # Delay (in ms) before probing SCSI</programlisting>
 
-    <para>This causes the kernel to pause for 5 seconds before probing
-      each SCSI device in your system.  If you only have IDE hard drives,
-      you can ignore this, otherwise you can try to lower this
-      number, to speed up booting.  Of course, if
-      you do this and &os; has trouble recognizing your SCSI devices,
-      you will have to raise it again.</para>
+    <para>該選項會讓 kernel 在偵測 SCSI 設備之前先等待 5 秒。  若只有 IDE 硬碟，
+      則可以忽略此設定，反之也可以試著把這數值調低，以加速開機過程。
+      當然，如此一來可能會造成 &os; 在識別 SCSI 設備時發生問題，
+      若有問題，請記得調高此數值看看。</para>
 
     <programlisting>options          KTRACE            # ktrace(1) support</programlisting>
 
-    <para>This enables kernel process tracing, which is useful in
-      debugging.</para>
+    <para>開啟 kernel 追蹤功能，在偵錯時很有用。</para>
 
     <programlisting>options          SYSVSHM           # SYSV-style shared memory</programlisting>
 
-    <para>This option provides for System&nbsp;V shared memory.  The most
-      common use of this is the XSHM extension in X, which many
-      graphics-intensive programs will automatically take advantage of for
-      extra speed.  If you use X, you will definitely want to include
-      this.</para>
+    <para>提供 System&nbsp;V shared memory (SHM) 支援，最常用到 SHM 的應該是
+      X 的 XSHM 延伸，不少繪圖相關程式會自動使用 SHM 以提供額外的速度。
+      如果您使用 X，您絕對需要它。</para>
 
     <programlisting>options          SYSVMSG           # SYSV-style message queues</programlisting>
 
-    <para>Support for System&nbsp;V messages.  This option only adds
-      a few hundred bytes to the kernel.</para>
+    <para>System&nbsp;V messages 支援。  它只會在 kernel 中佔用幾百 bytes
+      而已。</para>
 
     <programlisting>options          SYSVSEM           # SYSV-style semaphores</programlisting>
 
-    <para>Support for System&nbsp;V semaphores.  Less commonly used but only
-      adds a few hundred bytes to the kernel.</para>
+    <para>System&nbsp;V semaphores 支援，較少會用到，
+      但只會佔用核心幾百 bytes。</para>
 
     <note>
-      <para>The <option>-p</option> option of the &man.ipcs.1; command will
-	list any processes using each of these System&nbsp;V facilities.</para>
+      <para>&man.ipcs.1; 的 <option>-p</option> 參數可以顯示所有用到
+	System&nbsp;V 機制的 process。</para>
     </note>
 
     <programlisting>options 	     _KPOSIX_PRIORITY_SCHEDULING # POSIX P1003_1B real-time extensions</programlisting>
 
-    <para>Real-time extensions added in the 1993 &posix;.  Certain
-      applications in the Ports Collection use these
-      (such as <application>&staroffice;</application>).</para>
+    <para>1993 年時對 &posix; 所做的 Real-time 延伸。  Ports Collection
+      的某些程式會用到(比方 <application>&staroffice;</application>)。</para>
 
     <programlisting>options          KBD_INSTALL_CDEV  # install a CDEV entry in /dev</programlisting>
 
-    <para>This option is required to allow the creation of keyboard device
-      nodes in <filename>/dev</filename>.</para>
+    <para>該選項則是在 <filename>/dev</filename> 下建立鍵盤的設備節點所必須的
+      。</para>
 
     <programlisting>options          ADAPTIVE_GIANT    # Giant mutex is adaptive.</programlisting>
 
-    <para>Giant is the name of a mutual exclusion mechanism (a sleep mutex)
-      that protects a large set of kernel resources.  Today, this is an
-      unacceptable performance bottleneck which is actively being replaced
-      with locks that protect individual resources.  The
-      <literal>ADAPTIVE_GIANT</literal> option causes Giant to be included
-      in the set of mutexes adaptively spun on.  That is, when a thread
-      wants to lock the Giant mutex, but it is already locked by a thread
-      on another CPU, the first thread will keep running and wait for the
-      lock to be released.  Normally, the thread would instead go back to
-      sleep and wait for its next chance to run.  If you are not sure,
-      leave this in.</para>
-
-    <note>
-      <para>Note that on &os; 8.0-CURRENT and later versions, all mutexes are
-	adaptive by default, unless explicitly set to non-adaptive by
-	compiling with the <literal>NO_ADAPTIVE_MUTEXES</literal> option.  As
-	a result, Giant is adaptive by default now, and the
-	<literal>ADAPTIVE_GIANT</literal> option has been removed from the
-	kernel configuration.</para>
-    </note>
-
+	<para>Giant 專指一種特別的互斥鎖機制 (mutual exclusion machanism)，這個
+	  機制能保護很大一部份的 kernel 資源。然而這種作法往往成為 SMP 系統中的
+	  效能瓶頸，因此目前 FreeBSD 正積極地用僅保護個別資源的鎖來取代 Giant。
+	  <footnote><para>譯註：Giant 是最早 FreeBSD 用以支援 SMP 的方法，之後的 
+	  SMPng 計畫即是改寫這些 Giant lock，用更細緻的局部 lock 來取代 Giant lock
+	  以增進效能。</para></footnote>
+	  <literal>ADAPTIVE_GIANT</literal> 選項能使 Giant 要被互斥鎖上時，等待的
+	  thread 將動態適應地(adaptively) 自旋。
+	  <footnote><para>譯註：原文是 <literal>ADAPTIVE_GIANT</literal> option 
+	  causes Giant to be included in the set of mutexes adaptively spun on.
+	  自旋(spin) 指的是 thread 在等待進入關鍵區域(critical section) 之前，往往
+	  會進入空迴圈以等待其它 thread 退出關鍵區域。</para></footnote>
+	  也就是說，當一個 thread 希望鎖上 Giant，但 Giant 已經被其它 thread 鎖上
+	  時，這個 thread 將會保持執行並等待該 Giant 被釋放。如果沒有開啟這個選項，
+	  通常的情形是這個 thread 會進入 sleep 狀態，直到下次輪到它執行，它再嘗試
+	  要鎖上 Giant。如果您不確定這個選項的用途，就保持預設吧。</para>
+	
+	<note>
+	  <para>註：從 &os; 8.0-CURRENT 開始，所有的互斥所預設都是動態適應
+	  (adaptive) 的，除非在編譯時加上 <literal>NO_ADAPTIVE_MUTEXES</literal> 
+	  來強制不要動態適應。因此 8.0-CURRENT 之後的核心設定檔移除了 
+	  <literal>ADAPTIVE_GIANT</literal> 選項。</para>
+	</note>
 
     <indexterm>
       <primary>kernel options</primary>
@@ -696,10 +683,9 @@ options          NFS_ROOT          # NFS usable as /, requires NFSCLIENT</progra
     </indexterm>
     <programlisting>device          apic               # I/O APIC</programlisting>
 
-    <para>The apic device enables the use of the I/O APIC for interrupt
-      delivery.  The apic device can be used in both UP and SMP kernels, but
-      is required for SMP kernels.  Add <literal>options SMP</literal> to
-      include support for multiple processors.</para>
+	<para>apic 裝置開啟用 I/O APIC 來傳遞中斷(interrupt)。apic 裝置可用於 
+	  UP(單處理器) 或 SMP(多處理器) kernel，但 SMP kernel 一定得開啟 apic。
+	  若要 SMP 支援，請加入 <literal>options SMP</literal>。
 
     <note>
       <para>apic 只限 i386 架構才有，其他架構則不必加上這行。</para>
@@ -707,58 +693,51 @@ options          NFS_ROOT          # NFS usable as /, requires NFSCLIENT</progra
 
     <programlisting>device          eisa</programlisting>
 
-    <para>Include this if you have an EISA motherboard.  This enables
-      auto-detection and configuration support for all devices on the EISA
-      bus.</para>
+    <para>如果您的主機板支援 EISA，請加上它。開啟此選項可自動偵測並設定 EISA
+	  bus 上的所有裝置。</para>
 
     <programlisting>device          pci</programlisting>
 
-    <para>Include this if you have a PCI motherboard.  This enables
-      auto-detection of PCI cards and gatewaying from the PCI to ISA
-      bus.</para>
+    <para>如果您的主機板有 PCI 匯流排，請記得要加。  這個選項開啟可自動偵測 PCI
+      卡，並橋接 PCI 到 ISA 的匯流排。</para>
 
     <programlisting># Floppy drives
 device          fdc</programlisting>
 
-    <para>This is the floppy drive controller.</para>
+    <para>軟碟機。</para>
 
     <programlisting># ATA and ATAPI devices
 device          ata</programlisting>
 
-    <para>This driver supports all ATA and ATAPI devices.  You only need
-      one <literal>device ata</literal> line for the kernel to detect all
-      PCI ATA/ATAPI devices on modern machines.</para>
+	<para>這個驅動程式支援所有的 ATA 和 ATAPI 裝置。您只需要加入一行
+      <literal>device ata</literal> 即可自動偵測出所有的 PCI ATA/ATAPI 裝置。
+	</para>
 
     <programlisting>device          atadisk                 # ATA disk drives</programlisting>
 
-    <para>This is needed along with <literal>device ata</literal> for
-      ATA disk drives.</para>
+    <para>和 <literal>device ata</literal> 一起使用以支援 ATA 硬碟。</para>
 
     <programlisting>device          ataraid                 # ATA RAID drives</programlisting>
 
-    <para>This is needed along with <literal>device ata</literal> for ATA
-      RAID drives.</para>
+    <para>和 <literal>device ata</literal> 一起使用以支援 ATA RAID 硬碟。</para>
 
     <programlisting><anchor id="kernelconfig-atapi">
 device          atapicd                 # ATAPI CDROM drives</programlisting>
 
-    <para>This is needed along with <literal>device ata</literal> for
-      ATAPI CDROM drives.</para>
+    <para>和 <literal>device ata</literal> 一起使用以支援 ATAPI 光硬碟。</para>
 
     <programlisting>device          atapifd                 # ATAPI floppy drives</programlisting>
 
-    <para>This is needed along with <literal>device ata</literal> for
-      ATAPI floppy drives.</para>
+    <para>和 <literal>device ata</literal> 一起使用以支援 ATAPI 軟硬碟。</para>
 
     <programlisting>device          atapist                 # ATAPI tape drives</programlisting>
 
-    <para>This is needed along with <literal>device ata</literal> for
-      ATAPI tape drives.</para>
+    <para>和 <literal>device ata</literal> 一起使用以支援 ATAPI 磁帶碟。</para>
 
     <programlisting>options         ATA_STATIC_ID           # Static device numbering</programlisting>
 
-    <para>This makes the controller number static; without this,
-      the device numbers are dynamically allocated.</para>
+	<para>此選項能固定 ATA 控制器的編號。若沒有此選項，裝置的標號將會動態分配。
+	</para>
 
     <programlisting># SCSI Controllers
 device          ahb        # EISA AHA1742 family
@@ -786,10 +765,9 @@ device          ncv        # NCR 53C500
 device          nsp        # Workbit Ninja SCSI-3
 device          stg        # TMC 18C30/18C50</programlisting>
 
-    <para>SCSI controllers.  Comment out any you do not have in your
-      system.  If you have an IDE only system, you can remove these
-      altogether.  The <literal>*_REG_PRETTY_PRINT</literal> lines are
-      debugging options for their respective drivers.</para>
+	<para>SCSI 控制器。您可將您系統沒有的裝置註解掉。如果您的系統只有 IDE 裝置，
+	  您可以註解掉全部。<literal>*_REG_PRETTY_PRINT</literal> 是用來幫助除
+	  錯的選項。</para>
 
     <programlisting># SCSI peripherals
 device          scbus      # SCSI bus (required for SCSI)
@@ -800,14 +778,17 @@ device          cd         # CD
 device          pass       # Passthrough device (direct SCSI access)
 device          ses        # SCSI Environmental Services (and SAF-TE)</programlisting>
 
-    <para>SCSI peripherals.  Again, comment out any you do not have, or if
-      you have only IDE hardware, you can remove them completely.</para>
+	<para>SCSI 週邊裝置。用樣的，註解掉您沒有的裝置。如果您的系統只有 IDE，
+	  全部註解掉吧。</para>
 
     <note>
-      <para>The USB &man.umass.4; driver and a few other drivers use
-	the SCSI subsystem even though they are not real SCSI devices.
-	Therefore make sure not to remove SCSI support, if any such
-	drivers are included in the kernel configuration.</para>
+	  <para>USB &man.umass.4; 驅動程式及其它某些驅動程式會用到 SCSI 子系統，
+	    僅管它們並不是直的 SCSI 裝置。因此如果您用到這類的裝置，請不要移除
+		SCSI 支援。
+		<footnote><para>譯註：以譯者的經驗在沒有 SCSI 設備的系統上，通常留下 
+		<literal>scbus</literal>、<literal>da</literal> 和 
+		<literal>pass</literal> 即可。</para></footnote>
+	  </para>
     </note>
 
     <programlisting># RAID controllers interfaced to the SCSI subsystem
@@ -832,78 +813,68 @@ device          mlx        # Mylex DAC960 family
 device          pst        # Promise Supertrak SX6000
 device          twe        # 3ware ATA RAID</programlisting>
 
-    <para>Supported RAID controllers.  If you do not have any of these,
-      you can comment them out or remove them.</para>
+    <para>RAID 控制器的支援。如果您沒有任何 RAID 裝置，
+      您可以註解或移除之。</para>
 
     <programlisting># atkbdc0 controls both the keyboard and the PS/2 mouse
 device          atkbdc     # AT keyboard controller</programlisting>
 
-    <para>The keyboard controller (<literal>atkbdc</literal>) provides I/O
-      services for the AT keyboard and PS/2 style pointing devices.  This
-      controller is required by the keyboard driver
-      (<literal>atkbd</literal>) and the PS/2 pointing device driver
-      (<literal>psm</literal>).</para>
+    <para>鍵盤控制器 (<literal>atkbdc</literal>) 為 AT 鍵盤及 PS/2 滑鼠
+      提供 I/O 服務。鍵盤驅動程式 (<literal>atkbd</literal>) 及 PS/2 滑鼠
+      驅動程式 (<literal>psm</literal>) 也需要此控制器。</para>
 
     <programlisting>device          atkbd      # AT keyboard</programlisting>
 
-    <para>The <literal>atkbd</literal> driver, together with
-      <literal>atkbdc</literal> controller, provides access to the AT 84
-      keyboard or the AT enhanced keyboard which is connected to the AT
-      keyboard controller.</para>
+    <para><literal>atkbd</literal> 驅動程式跟 <literal>atkbdc</literal> 控制器
+      一起提供 AT 84 鍵盤或增強型 AT 鍵盤的支援。</para>
 
     <programlisting>device          psm        # PS/2 mouse</programlisting>
 
-    <para>Use this device if your mouse plugs into the PS/2 mouse
-      port.</para>
+    <para>如果您使用的是 PS/2 滑鼠，請開啟。</para>
 
     <programlisting>device          kbdmux        # keyboard multiplexer</programlisting>
 
     <para>多重鍵盤的支援。  若不打算同時接多組鍵盤的話，
-      那麼若要移除該行也沒關係。</para>
+      那麼移除該行也沒關係。</para>
 
     <programlisting>device          vga        # VGA video card driver</programlisting>
 
-    <para>The video card driver.</para>
+    <para>顯示卡驅動程式。</para>
 
     <programlisting>
 device          splash     # Splash screen and screen saver support</programlisting>
 
-    <para>Splash screen at start up!  Screen savers require this
-      too.</para>
+    <para>開機時顯示啟動畫面！<footnote><para>譯註：Splash screen 指的是帶有 
+	  logo、作者、版權聲明等等的啟動畫面。</para></footnote>螢幕保護程式也需
+	  要這個選項。</para>
 
     <programlisting># syscons is the default console driver, resembling an SCO console
 device          sc</programlisting>
 
-    <para><literal>sc</literal> is the default console driver and
-      resembles a SCO console.  Since most full-screen programs access the
-      console through a terminal database library like
-      <filename>termcap</filename>, it should not matter whether you use
-      this or <literal>vt</literal>, the <literal>VT220</literal>
-      compatible console driver.  When you log in, set your
-      <envar>TERM</envar> variable to <literal>scoansi</literal> if
-      full-screen programs have trouble running under this console.</para>
+	<para><literal>sc</literal>是預設的終端機驅動程式，類似 SCO 終端機。大部份
+	  的全螢幕程式都是透過終端機資料庫(terminal database library)，例如
+	  <filename>termcap</filename>，因此它們不在乎您用的是 <literal>sc</literal>
+	  還是相容 <literal>VT220</literal> 的 <literal>vt</literal>。如果您在
+	  <literal>sc</literal> 上使用全螢幕的程式遇到麻煩，請在登入後設定 
+	  <envar>TERM</envar> 環境變數為 <literal>scoansi</literal>。</para>
 
     <programlisting># Enable this for the pcvt (VT220 compatible) console driver
 #device          vt
 #options         XSERVER          # support for X server on a vt console
 #options         FAT_CURSOR       # start with block cursor</programlisting>
 
-    <para>This is a VT220-compatible console driver, backward compatible to
-      VT100/102.  It works well on some laptops which have hardware
-      incompatibilities with <literal>sc</literal>.  Also set your
-      <envar>TERM</envar> variable to <literal>vt100</literal> or
-      <literal>vt220</literal> when you log in.  This driver might also
-      prove useful when connecting to a large number of different machines
-      over the network, where <filename>termcap</filename> or
-      <filename>terminfo</filename> entries for the <literal>sc</literal>
-      device are often not available &mdash; <literal>vt100</literal>
-      should be available on virtually any platform.</para>
+	<para>這是相容 VT220 的終端機驅動程式，也相容 VT100/102。在某些不相容
+	  <literal>sc</literal> 的筆記型電腦上它運作良好。同樣地，登入後請將
+	  <envar>TERM</envar> 環境變數設定為 <literal>vt100</literal> 或
+	  <literal>vt220</literal>。透過網路連到各種不同的平臺時，這個驅動程式
+	  有可能較好用，因為其它作業系統的 <filename>termcap</filename> 或 
+	  <filename>terminfo</filename> 可能沒有 <literal>sc</literal> 的資訊，
+	  但 <literal>vt100</literal> 理論上所有作業系統都應該要有。
 
     <programlisting>device          agp</programlisting>
 
-    <para>Include this if you have an AGP card in the system.  This
-      will enable support for AGP, and AGP GART for boards which
-      have these features.</para>
+    <para>如果您的系統上有 AGP 介面卡，請加入此選項。除了支援 AGP 外，也支
+	  援 AGP GART 的功能。</para>
 
     <indexterm>
       <primary>APM</primary>
@@ -912,15 +883,14 @@ device          sc</programlisting>
     <programlisting># Power management support (see NOTES for more options)
 #device          apm</programlisting>
 
-    <para>Advanced Power Management support.  Useful for laptops,
-      although in &os; 5.X and above this is disabled in
-      <filename>GENERIC</filename> by default.</para>
+    <para>進階電源管理支援。在筆記型電腦上非常有用，
+      但是在 &os; 5.X 及後續版本的預設 kernel 設定檔 <filename>GENERIC</filename>
+      中是關閉的。</para>
 
     <programlisting># Add suspend/resume support for the i8254.
 device           pmtimer</programlisting>
 
-    <para>Timer device driver for power management events, such as APM and
-      ACPI.</para>
+    <para>電源管理所需的計時器裝置驅動程式，例如 APM 及 ACPI。</para>
 
     <programlisting># PCCARD (PCMCIA) support
 # PCMCIA and cardbus bridge support
@@ -928,8 +898,7 @@ device          cbb               # cardbus (yenta) bridge
 device          pccard            # PC Card (16-bit) bus
 device          cardbus           # CardBus (32-bit) bus</programlisting>
 
-    <para>PCMCIA support.  You want this if you are using a
-      laptop.</para>
+    <para>PCMCIA 支援，您如果使用筆記型電腦的話，或許會需要它。</para>
 
     <programlisting># Serial (COM) ports
 device          sio               # 8250, 16[45]50 based serial ports</programlisting>
@@ -962,24 +931,23 @@ device          sio               # 8250, 16[45]50 based serial ports</programli
     <programlisting># Parallel port
 device          ppc</programlisting>
 
-    <para>This is the ISA-bus parallel port interface.</para>
+    <para>這是 ISA 匯流排的並列埠介面。</para>
 
     <programlisting>device          ppbus      # Parallel port bus (required)</programlisting>
 
-    <para>Provides support for the parallel port bus.</para>
+    <para>提供並列埠匯流排支援。</para>
 
     <programlisting>device          lpt        # Printer</programlisting>
 
-    <para>Support for parallel port printers.</para>
+    <para>提供並列埠印表機支援。</para>
 
     <note>
-      <para>All three of the above are required to enable parallel printer
-	support.</para>
+      <para>上面這三項都需要開啟並列埠印表機支援。</para>
     </note>
 
     <programlisting>device          plip       # TCP/IP over parallel</programlisting>
 
-    <para>This is the driver for the parallel network interface.</para>
+    <para>提供並列網路介面的驅動程式。</para>
 
     <programlisting>device          ppi        # Parallel port interface device</programlisting>
 
@@ -1345,14 +1313,13 @@ device          fwe           # Ethernet over FireWire (non-standard!)</programl
       </varlistentry>
 
       <varlistentry>
-	<term>The kernel does not boot:<anchor
+	<term>kernel 無法開機：<anchor
 	  id="kernelconfig-noboot"></term>
 
 	<listitem>
-	  <para>If your new kernel does not boot, or fails to
-	    recognize your devices, do not panic!  Fortunately, &os; has
-	    an excellent mechanism for recovering from incompatible
-	    kernels.  Simply choose the kernel you want to boot from at
+	  <para>如果您的新 kernel 無法開機或無法辨識您的硬體，別慌張！
+	    幸運的是，&os; 有一套完美的機制來還原。
+	    Simply choose the kernel you want to boot from at
 	    the &os; boot loader. You can access this when the system
 	    boot menu appears.  Select the <quote>Escape to a loader
             prompt</quote> option, number six.  At the prompt, type
@@ -1393,8 +1360,7 @@ device          fwe           # Ethernet over FireWire (non-standard!)</programl
       </varlistentry>
 
       <varlistentry>
-	<term>The kernel works, but &man.ps.1; does not work
-	  any more:</term>
+	<term>核心運作正常，但是 &man.ps.1; 卻無法正常運作：</term>
 
 	<listitem>
 	  <para>If you have installed a different version of the kernel

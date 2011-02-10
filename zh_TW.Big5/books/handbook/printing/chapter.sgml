@@ -318,134 +318,117 @@
 	    這種方式在噴墨印表機上很常見，用來回報墨水存量以及其他狀態資訊等。
 	    第二種方法是用 &postscript;，如果印表機有支援的話。</para>
 
-	  <para>&postscript; jobs are
-	    actually programs sent to the printer; they need not produce
-	    paper at all and may return results directly to the computer.
-	    &postscript; also uses two-way communication to tell the
-	    computer about problems, such as errors in the &postscript;
-	    program or paper jams.  Your users may be appreciative of such
-	    information.  Furthermore, the best way to do effective
-	    accounting with a &postscript; printer requires two-way
-	    communication: you ask the printer for its page count (how
-	    many pages it has printed in its lifetime), then send the
-	    user's job, then ask again for its page count.  Subtract the
-	    two values and you know how much paper to charge to the
-	    user.</para>
+	  <para>&postscript; 事實上是把程式碼送到印表機上去；
+	    這些程式並不需要直接把東西印到紙上，而且可以把結果直接回傳給電腦。
+	    &postscript; 也用雙向通訊的方式來告知電腦有發生問題，像是
+	    &postscript; 
+	    程式有錯誤、或是卡紙之類，使用者們應該會需要這些資訊的。
+	    更進一步來說，要在 &postscript; 
+	    印表機上做列印統計也需要雙向通訊：
+	    首先詢問印表機總列印頁數
+	    (這台印表機出廠以來總共列印過的張數)，接著傳送使用者的工作，
+	    然後再問一次總列印頁數。
+	    把這兩個數值相減之後，就可以知道要向這位使用者收多少列印費用了。
+	    </para>
 	</sect4>
 	  
 	<sect4 id="printing-parallel">
-	  <title>Parallel Ports</title>
+	  <title>並列埠</title>
 
-	  <para>To hook up a printer using a parallel interface, connect
-	    the Centronics cable between the printer and the computer.
-	    The instructions that came with the printer, the computer, or
-	    both should give you complete guidance.</para>
+	  <para>要使用並列介面印表機時，需要把印表機和電腦用
+	  Centronics 排線連接起來。
+	  印表機或電腦附的使用說明書上應該會有詳細的操作指引。</para>
 
-	  <para>Remember which parallel port you used on the computer.
-	    The first parallel port is <filename>ppc0</filename> to
-	    FreeBSD; the second is <filename>ppc1</filename>, and so
-	    on.  The printer device name uses the same scheme:
-	    <filename>/dev/lpt0</filename> for the printer on the first
-	    parallel ports etc.</para>
+	  <para>還要記住您使用電腦的哪一個並列埠。 FreeBSD
+	    上第一個並列埠叫做 <filename>ppc0</filename>，第二個則是
+	    <filename>ppc1</filename>，依此類推。
+	    印表機的裝置名稱 (device name) 
+	    也用相同的規則，接在第一個並列埠的印表機就叫
+	    <filename>/dev/lpt0</filename>，下略。
 	</sect4>
 
 	<sect4 id="printing-serial">
-	  <title>Serial Ports</title>
+	  <title>串列埠</title>
 
-	  <para>To hook up a printer using a serial interface, connect the
-	    proper serial cable between the printer and the computer.  The
-	    instructions that came with the printer, the computer, or both
-	    should give you complete guidance.</para>
+	  <para>要使用串列介面印表機時，
+	    需要找一條適用的串列排線把印表機和電腦連接起來。
+	    印表機或電腦附的使用說明書上應該會有詳細的操作指引。</para>
 
-	  <para>If you are unsure what the <quote>proper serial
-	    cable</quote> is, you may wish to try one of the following
-	    alternatives:</para>
+	  <para>如果不確定哪條才是<quote>適用的串列排線</quote>，
+	    以下有幾種可能的情況，您可以挑一種來試試：
 
 	  <itemizedlist>
 	    <listitem>
-	      <para>A <emphasis>modem</emphasis> cable connects each pin
-		of the connector on one end of the cable straight through
-		to its corresponding pin of the connector on the other
-		end.  This type of cable is also known as a
-		<quote>DTE-to-DCE</quote> cable.</para>
+	      <para>兩端的每根針腳直接對接的<emphasis>數據機
+		(modem)</emphasis> 排線。 這種排線又被稱為
+		<quote>DTE-to-DCE</quote> 排線。</para>
 	    </listitem>
 
 	    <indexterm><primary>null-modem cable</primary></indexterm>
 	    <listitem>
-	      <para>A <emphasis>null-modem</emphasis> cable connects some
-		pins straight through, swaps others (send data to receive
-		data, for example), and shorts some internally in each
-		connector hood.  This type of cable is also known as a
-		<quote>DTE-to-DTE</quote> cable.</para>
+	      <para>有些腳直接對接，有些腳對調，有些腳短路的
+		<emphasis>null-modem</emphasis> 排線。
+		這種排線又被稱為 <quote>DTE-to-DTE</quote> 排線。</para>
 	    </listitem>
 
 	    <listitem>
-	      <para>A <emphasis>serial printer</emphasis> cable, required
-		for some unusual printers, is like the null-modem cable,
-		but sends some signals to their counterparts instead of
-		being internally shorted.</para>
+	      <para>某些較少見的印表機可能會需要
+		<emphasis>serial printer</emphasis> 排線。
+		這種排線類似 null-modem
+		排線，但是有些短路的腳是通的。</para>
 	    </listitem>
 	  </itemizedlist>
 
 	  <indexterm><primary>baud rate</primary></indexterm>
 	  <indexterm><primary>parity</primary></indexterm>
 	  <indexterm><primary>flow control protocol</primary></indexterm>
-	  <para>You should also set up the communications parameters for
-	    the printer, usually through front-panel controls or DIP
-	    switches on the printer.  Choose the highest
-	    <literal>bps</literal> (bits per second, sometimes
-	    <emphasis>baud rate</emphasis>) that both your computer
-	    and the printer can support.  Choose 7 or 8 data bits; none,
-	    even, or odd parity; and 1 or 2 stop bits.  Also choose a flow
-	    control protocol:  either none, or XON/XOFF (also known as
-	    <quote>in-band</quote> or <quote>software</quote>) flow control.
-	    Remember these settings for the software configuration that
-	    follows.</para>
+	  <para>您應該還需要替印表機設定通訊參數，通常來說是用前面板或是
+	    DIP 開關來設定。 把 <literal>bps</literal>
+	    (每秒多少位元，又稱為 <emphasis>baud rate</emphasis>)
+	    設成印表機和電腦所能支援的最大值，設定資料位元為 7 位元或 8
+	    位元；沒有、奇數或偶數的同位元檢查；1 或 2 個停止位元。
+	    還要選擇流量控制： 無、XON/XOFF 
+	    (又稱為<quote>頻內</quote>或<quote>軟體</quote>流量控制)。
+	    把設定值記下來接設設定軟體時會用到。</para>
 	</sect4>
       </sect3>
 
       <sect3 id="printing-software">
-	<title>Software Setup</title>
+	<title>軟體設定</title>
 
-	<para>This section describes the software setup necessary to print
-	  with the <application>LPD</application> spooling system in FreeBSD.
-	</para>
+	<para>本章節會提到在 FreeBSD 下用 <application>LPD</application>
+	  列印緩衝系統印東西時所需要做的軟體設定。</para>
 
-	<para>Here is an outline of the steps involved:</para>
+	<para>大致上有這些步驟：</para>
 
 	<procedure>
 	  <step>
-	    <para>Configure your kernel, if necessary, for the port you
-	      are using for the printer; section <link
-	      linkend="printing-kernel">Kernel Configuration</link> tells
-	      you what you need to do.</para>
+	    <para>配合印表機的連接埠，視需要去修改核心 (kernel) 的組態。
+	      <link linkend="printing-kernel">
+	      核心組態設定</link>會告訴您該怎麼做。</para>
 	  </step>
 
 	  <step>
-	    <para>Set the communications mode for the parallel port, if
-	      you are using a parallel port; section <link
-	      linkend="printing-parallel-port-mode">Setting the
-	      Communication Mode for the Parallel Port</link> gives
-	      details.</para>
+	    <para>如果您用的是並列埠，那還需要設定並列埠的通訊模式。
+	      <link linkend="printing-parallel-port-mode">
+	      並列埠的通訊模式設定</link>有更詳細的說明。</para>
 	  </step>
 
 	  <step>
-	    <para>Test if the operating system can send data to the printer.
-	      Section <link linkend="printing-testing">Checking Printer
-	      Communications</link> gives some suggestions on how to do
-	      this.</para>
+	    <para>測試作業系統是否可傳送資料給印表機。
+	      <link linkend="printing-testing">
+	      印表機連線狀況測試</link>有建議一些測試的方法。</para>
 	  </step>
 
 	  <step>
-	    <para>Set up <application>LPD</application> for the printer by 
-	      modifying the file
-	      <filename>/etc/printcap</filename>.  You will find out how
-	      to do this later in this chapter.</para>
+	    <para>修改 <filename>/etc/printcap</filename>，把 <application>
+	      LPD</application> 設定好。 稍後本章節將會說明如何修改這個檔案。
+	      </para>
 	  </step>
 	</procedure>
 
 	<sect4 id="printing-kernel">
-	  <title>Kernel Configuration</title>
+	  <title>核心組態設定</title>
 
 	  <para>The operating system kernel is compiled to work with a
 	    specific set of devices.  The serial or parallel interface for
@@ -493,8 +476,7 @@ ppc0: FIFO with 16/16/8 bytes threshold</screen>
 	</sect4>
       </sect3>
 	<sect3 id="printing-parallel-port-mode">
-	  <title>Setting the Communication Mode for the Parallel
-	    Port</title>
+	  <title>並列埠的通訊模式設定</title>
 
 	  <para>When you are using the parallel interface, you can choose
 	    whether FreeBSD should use interrupt-driven or polled
@@ -613,7 +595,7 @@ ppc0: FIFO with 16/16/8 bytes threshold</screen>
 	</sect3>
 
 	<sect3 id="printing-testing">
-	  <title>Checking Printer Communications</title>
+	  <title>印表機連線狀況測試</title>
 
 	  <para>Before proceeding to configure the spooling system, you
 	    should make sure the operating system can successfully send

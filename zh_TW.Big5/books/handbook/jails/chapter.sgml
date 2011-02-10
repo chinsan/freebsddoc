@@ -1,7 +1,7 @@
 <!--
     The FreeBSD Documentation Project
 
-    $FreeBSD: doc/zh_TW.Big5/books/handbook/jails/chapter.sgml,v 1.2 2008/06/30 16:41:55 chinsan Exp $
+    $FreeBSD$
 
     Original revision: 1.15
 
@@ -516,7 +516,7 @@ jail_<replaceable>www</replaceable>_devfs_ruleset="<replaceable>www_ruleset</rep
 	  </listitem>
 	  <listitem>
 	    <para>每個 jailspace (各 jail 可讀寫的部分) 都建在 <filename
-	      role="directory">/home/js</filename>>。<para>
+	      role="directory">/home/js</filename>。<para>
 	  </listitem>
 	</itemizedlist>
 
@@ -782,7 +782,7 @@ jail_www_devfs_enable="YES"</programlisting>
 &prompt.root; <userinput>umount /home/j/www</userinput></screen>
 
 	    <note>
-	      <para>可讀寫空間(<filename role="directory">/s</filename>)
+	      <para>可讀寫空間(<filename role="directory">/s</filename>
 		是掛載在唯讀檔案系統底下，故要先卸載。</para>
 	    </note>
 	  </step>

@@ -794,28 +794,23 @@ Script done, &hellip;</screen>
 	  <quote>targets</quote>，然後依您所給的 target 就會決定會做哪些動作
 	  。</para>
 
-	<para>Some targets are listed in the
-	  <filename>Makefile</filename>, but are not meant for you to run.
+	<para>某些 targets 會在 <filename>Makefile</filename> 列出，但是不一定是給您使用的。
 	  Instead, they are used by the build process to break out the
 	  steps necessary to rebuild the system into a number of
 	  sub-steps.</para>
 
-	<para>Most of the time you will not need to pass any parameters to
-	    &man.make.1;, and so your command like will look like
-	    this:</para>
+	<para>通常，您不需要給 &man.make.1 任何參數，所以您的指令看起來像這樣：</para>
 
 	<screen>&prompt.root; <userinput>make <replaceable>target</replaceable></userinput></screen>
 
-	<para>Where <replaceable>target</replaceable> will be one of
-	  many build options.  The first target should always be
-	  <makevar>buildworld</makevar>.</para>
+	<para>這裡的 <replaceable>target</replaceable>可以是一個或多個建立選項。
+	  第一個 target 應該都要是 <makevar>buildworld</makevar>。</para>
 
-	<para>As the names imply, <maketarget>buildworld</maketarget>
-	  builds a complete new tree under <filename>/usr/obj</filename>,
-	  and <maketarget>installworld</maketarget>, another target, installs this tree on
-	  the current machine.</para>
+	<para>正如其名，<maketarget>buildworld</maketarget>
+	  建立一個完整的系統放在 <filename>/usr/obj</filename>；
+	  而另一個 target <maketarget>installworld</maketarget> 則將這些東西安裝到機器上。</para>
 
-	<para>Having separate options is very useful for two reasons.  First, it allows you
+	<para>將選項獨立有兩個好理由。第一，it allows you
 	  to do the build safe in the knowledge that no components of
 	  your running system will be affected.  The build is
 	  <quote>self hosted</quote>.  Because of this, you can safely

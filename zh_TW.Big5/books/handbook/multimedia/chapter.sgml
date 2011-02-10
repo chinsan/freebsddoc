@@ -2,7 +2,7 @@
      The FreeBSD Documentation Project
 
      $FreeBSD: doc/zh_TW.Big5/books/handbook/multimedia/chapter.sgml,v 1.6 2006/08/05 04:53:20 vanilla Exp $
-     Original revision: 1.113
+     Original revision: 1.117
 -->
 
 <chapter id="multimedia">
@@ -20,20 +20,20 @@
   <sect1 id="multimedia-synopsis">
   <title>概述</title>
 
-    <para>FreeBSD 廣泛地支援各種音效卡， 讓您可以享受來自電腦上的高傳真音質(Hi-Fi)，
-	此外還包括了錄製和播放 MPEG Audio Layer 3 (MP3)、 WAV、 以及 Ogg Vorbis 
-	等許多種格式聲音的能力。同時 FreeBSD Ports Collection 也包括了許多的應用程式，
-	讓您可以錄音、編修音效以及控制 MIDI 配備。</para>
+    <para>FreeBSD 廣泛地支援各種音效卡， 讓您可以享受來自電腦上的高傳真音質
+      (Hi-Fi)，此外還包括了錄製和播放 MPEG Audio Layer 3 (MP3)、 WAV、 以及
+      Ogg Vorbis 等許多種格式聲音的能力。同時 FreeBSD Ports Collection
+      也包括了許多的應用程式，讓您可以錄音、編修音效以及控制 MIDI 配備。</para>
 
     <para>要是喜歡動手嘗試不同的體驗， FreeBSD 也能播放一般的視訊檔和 DVD。
-	編碼、轉換和播放視訊的程式比起處理聲音的程式略少一些。例如， 在撰寫這章時， 
-	FreeBSD Ports Collection 中還沒有類似 <filename
-      role="package">audio/sox</filename> 那樣好用的編碼工具，能夠用來轉換不同的格式。
-	不過，這個領域的軟體研發進展是相當迅速的。</para>
+      編碼、轉換和播放視訊的程式比起處理聲音的程式略少一些。  例如，
+      在撰寫這章時，FreeBSD Ports Collection 中還沒有類似 <filename
+      role="package">audio/sox</filename> 那樣好用的編碼工具，
+      能夠用來轉換不同的格式。  不過，這個領域的軟體研發進展是相當迅速的。</para>
 
     <para>本章將介紹設定音效卡的必要步驟。先前介紹到的 X11
       (<xref linkend="x11">) 安裝和設定裡，已經講到了顯示卡的部份，
-	但要想有更好的播放效果， 仍需要一些細部調整。</para>
+	但要想有更好的播放效果，仍需要一些細部調整。</para>
 
     <para>讀完這章，您將了解：</para>
 
@@ -89,7 +89,8 @@
 
     <warning>
       <para>如果要用 &man.mount.8; 指令來 mount 音樂光碟的話，通常會發生錯誤，
-        甚至導致 <emphasis>kernel panic</emphasis>。 這是因為音樂光碟是特殊編碼，而非一般的 ISO 檔案系統之故。</para>
+        甚至導致 <emphasis>kernel panic</emphasis>。
+	這是因為音樂光碟是特殊編碼，而非一般的 ISO 檔案系統之故。</para>
     </warning>
 
   </sect1>
@@ -122,19 +123,19 @@
     <indexterm><primary>PCI</primary></indexterm>
     <indexterm><primary>ISA</primary></indexterm>
     <indexterm><primary>sound cards</primary></indexterm>
-    <para>開始設定之前，必須先知道你的音效卡型號、晶片為何，以及是 PCI 或 ISA 規格。
-      FreeBSD 有支援許多種的 PCI、ISA 音效卡，請檢查支援的音效硬體表 <ulink
-      url="&rel.current.hardware;">Hardware Notes</ulink>，以確認你的音效卡是否支援。
-      本文也會提到相對應該卡的驅動程式。</para>
+    <para>開始設定之前，必須先知道你的音效卡型號、晶片為何，以及是 PCI 或 ISA
+      規格。  FreeBSD 有支援許多種的 PCI、ISA 音效卡，請檢查支援的音效硬體表
+      <ulink url="&rel.current.hardware;">Hardware Notes</ulink>，
+      以確認你的音效卡是否支援。  本文也會提到相對應該卡的驅動程式。</para>
 
     <indexterm>
       <primary>kernel</primary>
       <secondary>configuration</secondary>
     </indexterm>
 
-    <para>要使用音效卡，必須要載入正確的驅動程式才行。有兩種方式都可以完成這動作，
-      最簡單方式就是以 &man.kldload.8; 來輕鬆載入 kernel 動態模組(module)，
-      像是下列指令：</para>
+    <para>要使用音效卡，必須要載入正確的驅動程式才行。
+      有兩種方式都可以完成這動作，最簡單方式就是以 &man.kldload.8;
+      來輕鬆載入 kernel 動態模組(module)，像是下列指令：</para>
 
     <screen>&prompt.root; <userinput>kldload snd_emu10k1</userinput></screen>
 
@@ -146,66 +147,44 @@
     <para>上面例子是給 Creative &soundblaster; Live! 音效卡使用的。
       其他可用的音效卡驅動程式模組，可參考
       <filename>/boot/defaults/loader.conf</filename> 範例。
-      若不確定到底該用哪一種驅動程式，那麼可以試試載入 <filename>snd_driver</filename>
-      模組看看：</para>
+      若不確定到底該用哪一種驅動程式，那麼可以試試載入
+      <filename>snd_driver</filename> 模組看看：</para>
 
     <screen>&prompt.root; <userinput>kldload snd_driver</userinput></screen>
 
-    <para>This is a metadriver loading the most common device drivers
-      at once.  This speeds up the search for the correct driver.  It
-      is also possible to load all sound drivers via the
-      <filename>/boot/loader.conf</filename> facility.</para>
+    <para>這個組合程式會載入常用的許多音效卡驅動程式。
+      這將可以縮短找尋正確驅動程式的時間。當然，也可以直接透過 <filename>/boot/loader.conf</filename>
+      載入所有的音效卡驅動程式。</para>
 
-    <para>If you wish to find out the driver selected for your
-      soundcard after loading the <filename>snd_driver</filename>
-      metadriver, you may check the <filename>/dev/sndstat</filename>
-      file with the <command>cat /dev/sndstat</command>
-      command.</para>
+    <para>如果您想在載入 <filename>snd_driver</filename> 後找出
+      屬於您音效卡的驅動程式，您可以查看利用 <command>cat /dev/sndstat</command> 來
+      查看 <filename>/dev/sndstat</filename> 內容。</para>
 
-    <note>
-      <para>Under &os;&nbsp;4.X, to load all sound drivers, you have
-	to load the <filename>snd</filename> module instead of
-	<filename>snd_driver</filename>.</para>
-    </note>
-
-    <para>A second method is to statically
-      compile in support for your sound card in your kernel.  The
-      section below provides the information you need to add support
-      for your hardware in this manner.  For more information about
-      recompiling your kernel, please see <xref
-      linkend="kernelconfig">.</para>
+    <para>第二種方式是編譯核心，將對音效卡的支援編入核心。
+      在下面的章節中將會介紹如何操作。關於重新編譯核心，
+      請參考 <xref linkend="kernelconfig">。</para>
 
     <sect3>
-      <title>Configuring a Custom Kernel with Sound Support</title>
+      <title>設定支援音效卡的核心</title>
 
-      <para>The first thing to do is adding the generic audio driver
-	&man.sound.4; to the kernel, for that you will need to
-	add the following line to the kernel configuration file:</para>
+      <para>首先，將通用音效卡驅動程式 &man.sound.4; 增加到核心，您
+        需要在核心設定檔中增加下面這一行：</para>
 
       <programlisting>device sound</programlisting>
 
-      <para>Under &os;&nbsp;4.X, you would use the following
-	line:</para>
-
-      <programlisting>device pcm</programlisting>
-
-      <para>Then we have to add the support for our sound card.
-	Therefore, we need to know which driver supports the card.
-	Check the supported audio devices list of the <ulink
-	url="&rel.current.hardware;">Hardware Notes</ulink>, to
-	determine the correct driver for your sound card.  For
-	example, a Creative &soundblaster; Live! sound card is
-	supported by the &man.snd.emu10k1.4; driver.  To add the support
-	for this card, use the following:</para>
+      <para>接著，我們需要讓核心支援我們的音效卡。
+	因此，我們需要知道哪一個驅動程式支援我們的音效卡。
+	查看音效卡支援清單 <ulink url="&rel.current.hardware;">Hardware Notes</ulink>，
+	找出正確的驅動程式。例如，Creative &soundblaster; Live! 這張音效卡
+	的驅動程式為 &man.snd.emu10k1.4;。要新增此張卡的支援，需要在
+	核心設定檔中加入這一行：</para>
 
       <programlisting>device snd_emu10k1</programlisting>
 
       <para>Be sure to read the manual page of the driver for the
 	syntax to use.  Information regarding the syntax of sound
 	drivers in the kernel configuration can also be found in the
-	<filename>/usr/src/sys/conf/NOTES</filename> file
-	(<filename>/usr/src/sys/i386/conf/LINT</filename> for
-	&os;&nbsp;4.X).</para>
+	<filename>/usr/src/sys/conf/NOTES</filename> file.</para>
 
       <para>Non-PnP ISA cards may require you to provide the kernel
 	with information on the sound card settings (IRQ, I/O port,
@@ -236,22 +215,12 @@ hint.sbc.0.flags="0x15"</programlisting>
 	<filename>/boot/device.hints</filename> file is covered in the
 	sound driver manual page.  On &os;&nbsp;4.X, these settings
 	are directly written in the kernel configuration file.  In the
-	case of our ISA card, we would only use this line:</para>
-
-      <programlisting>device sbc0 at isa? port 0x220 irq 5 drq 1 flags 0x15</programlisting>
+	case of our ISA card.</para>
 
       <para>The settings shown above are the defaults.  In some
 	cases, you may need to change the IRQ or the other settings to
 	match your card.  See the &man.snd.sbc.4; manual page for more
 	information.</para>
-
-      <note>
-	<para>Under &os;&nbsp;4.X, some systems with built-in
-	  motherboard sound devices may require the following option in
-	  the kernel configuration:</para>
-
-	<programlisting>options PNPBIOS</programlisting>
-      </note>
     </sect3>
   </sect2>
 
@@ -301,25 +270,6 @@ kld snd_ich (1p/2r/0v channels duplex default)</screen>
     <para>where <replaceable>filename</replaceable> can be any file.
       This command line should produce some noise, confirming the
       sound card is actually working.</para>
-
-    <note>
-      <para>&os;&nbsp;4.X users need to create the sound card device
-	nodes before being able to use it.  If the card showed up in
-	message buffer as <devicename>pcm0</devicename>, you will have
-	to run the following as <username>root</username>:</para>
-
-      <screen>&prompt.root; <userinput>cd /dev</userinput>
-&prompt.root; <userinput>sh MAKEDEV snd0</userinput></screen>
-
-      <para>If the card detection returned <devicename>pcm1</devicename>,
-	follow the same steps as shown above, replacing
-	<devicename>snd0</devicename> with
-	<devicename>snd1</devicename>.</para>
-
-      <para><command>MAKEDEV</command> will create a group of device
-	nodes that will be used by the different sound related
-	applications.</para>
-    </note>
 
     <para>Sound card mixer levels can be changed via the &man.mixer.8;
       command.  More details can be found in the &man.mixer.8; manual
@@ -448,10 +398,6 @@ kld snd_ich (1p/2r/0v channels duplex default)</screen>
 
     <title>設定預設(Mixer Channel)的音量大小</title>
 
-    <note>
-      <para>本功能只有在 &os; 5.3-RELEASE 及之後版本才有支援。</para>
-    </note>
-
     <para>The default values for the different mixer channels are
       hardcoded in the sourcecode of the &man.pcm.4; driver.  There are
       a lot of different applications and daemons that allow
@@ -460,6 +406,7 @@ kld snd_ich (1p/2r/0v channels duplex default)</screen>
       solution, we want to have default values at the driver
       level.  This is accomplished by defining the appropriate
       values in <filename>/boot/device.hints</filename>. E.g.:</para>
+
 <programlisting>hint.pcm.0.vol="100"</programlisting>
 
     <para>This will set the volume channel to a default value of
@@ -713,38 +660,29 @@ MPEG 1.0 layer III, 128 kbit/s, 44100 Hz joint-stereo
 
   <title>播放影片</title>
 
-    <para>Video playback is a very new and rapidly developing application
-      area.  Be patient.  Not everything is going to work as smoothly as
-      it did with sound.</para>
+    <para>播放影片是個很新且仍在迅速發展中的應用領域。  請務必保持耐心，
+      因為並非所有事情都像處理聲音方面那麼順利。</para>
 
-    <para>Before you begin, you should know the model of the video
-      card you have and the chip it uses.  While <application>&xorg;</application> and <application>&xfree86;</application> support a
-      wide variety of video cards, fewer give good playback
-      performance.  To obtain a list of extensions supported by the
-      X server using your card use the command &man.xdpyinfo.1; while
-      X11 is running.</para>
+    <para>在開始之前，要先瞭解所用的顯示卡類型以及它所用的顯示晶片類型。
+      儘管 <application>&xorg;</application> 及 
+      <application>&xfree86;</application> 有支援許多顯示卡，
+      但真正能達到良好的播放效果卻寥寥無幾。
+      在 X11 執行時，可以用 &man.xdpyinfo.1; 來取得目前 X server 
+      在您所用的顯示卡所能支援的功能列表。</para>
 
-    <para>It is a good idea to have a short MPEG file which can be
-      treated as a test file for evaluating various players and
-      options.  Since some DVD players will look for DVD media in
-      <filename>/dev/dvd</filename> by default, or have this device
-      name hardcoded in them, you might find it useful to make
-      symbolic links to the proper devices:</para>
-
-      <screen>&prompt.root; <userinput>ln -sf /dev/acd0c /dev/dvd</userinput>
-&prompt.root; <userinput>ln -sf /dev/racd0c /dev/rdvd</userinput></screen>
-
-    <para>On FreeBSD&nbsp;5.X, which uses &man.devfs.5; there
-        is a slightly different set of recommended links:</para>
+    <para>為了要對各播放器及播放選項作效能評估，
+      建議找一段 MPEG 短片來做測試用途。
+      由於有些 DVD 播放器預設會到 <filename>/dev/dvd</filename> 找 DVD 檔案，
+      因此建立 symbolic link 來連到相對應的實體設備位置，
+      會是相當不錯的選擇：</para>
 
       <screen>&prompt.root; <userinput>ln -sf /dev/acd0 /dev/dvd</userinput>
 &prompt.root; <userinput>ln -sf /dev/acd0 /dev/rdvd</userinput></screen>
 
-    <para>Note that due to the nature of &man.devfs.5;,
-      manually created links like these will not persist if you reboot
-      your system.  In order to create the symbolic links
-      automatically whenever you boot your system, add the following
-      lines to <filename>/etc/devfs.conf</filename>:</para>
+    <para>請留意：由於 &man.devfs.5; 本身特性所致，
+      像這樣手動建立的連結會在每次重開機後消失。
+      因此，若想每次重開機後會自動產生相關 symbolic link 的話，
+      請把下列內容加到 <filename>/etc/devfs.conf</filename>：</para>
 
     <programlisting>link acd0 dvd
 link acd0 rdvd</programlisting>
@@ -752,27 +690,6 @@ link acd0 rdvd</programlisting>
     <para>Additionally, DVD decryption, which requires invoking
       special DVD-ROM functions, requires write permission on the DVD
       devices.</para>
-
-    <indexterm>
-      <primary>kernel options</primary>
-      <secondary>CPU_ENABLE_SSE</secondary>
-    </indexterm>
-    <indexterm>
-      <primary>kernel options</primary>
-      <secondary>USER_LDT</secondary>
-    </indexterm>
-
-    <para>Some of the ports discussed rely on the following kernel
-      options to build correctly.  Before attempting to build, add
-      this option to the kernel configuration file, build a new kernel, and reboot:</para>
-
-      <programlisting>options CPU_ENABLE_SSE</programlisting>
-
-    <note>
-      <para>On &os;&nbsp;4.X <literal>options USER_LDT</literal> should
-	be added to the kernel configuration file.  This option is not
-	available on &os;&nbsp;5.X and later version.</para>
-    </note>
 
     <para>To enhance the shared memory X11 interface, it is
       recommended that the values of some &man.sysctl.8; variables
@@ -1444,10 +1361,7 @@ bktr0: Pinnacle/Miro TV, Philips SECAM tuner.</programlisting>
 
       <para>See the &man.bktr.4; manual page and the
 	<filename>/usr/src/sys/conf/NOTES</filename> file for more
-	details on the available options. (If you are under
-	&os;&nbsp;4.X, <filename>/usr/src/sys/conf/NOTES</filename> is
-	replaced with
-	<filename>/usr/src/sys/i386/conf/LINT</filename>.)</para>
+	details on the available options.</para>
     </sect2>
 
     <sect2>
@@ -1576,14 +1490,6 @@ device uscanner</programlisting>
 
 	<para>This shows that our scanner is using the
 	  <filename>/dev/uscanner0</filename> device node.</para>
-
-	<note>
-	  <para>On &os;&nbsp;4.X, the USB daemon (&man.usbd.8;) must
-	    be running to be able to see some USB devices.  To enable
-	    this, add <literal>usbd_enable="YES"</literal> to your
-	    <filename>/etc/rc.conf</filename> file and reboot the
-	    machine.</para>
-	  </note>
       </sect3>
 
       <sect3>
@@ -1595,8 +1501,8 @@ device uscanner</programlisting>
 	  your kernel configuration file.  The
 	  <filename>GENERIC</filename> kernel supports the most common
 	  SCSI controllers.  Be sure to read the
-	  <filename>NOTES</filename> file (<filename>LINT</filename>
-	  under &os;&nbsp;4.X) and add the correct line to your kernel
+	  <filename>NOTES</filename> file 
+	  and add the correct line to your kernel
 	  configuration file.  In addition to the SCSI adapter driver,
 	  you need to have the following lines in your kernel
 	  configuration file:</para>
@@ -1798,10 +1704,7 @@ add path uscanner0 mode 660</programlisting>
       <programlisting>devfs_system_ruleset="system"</programlisting>
 
       <para>More information regarding these lines can be found in the
-	&man.devfs.8; manual page.  Under &os;&nbsp;4.X, the
-	<groupname>operator</groupname> group has, by default, read
-	and write permissions to
-	<filename>/dev/uscanner0</filename>.</para>
+	&man.devfs.8; manual page.</para>
 
       <note>
 	<para>Of course, for security reasons, you should think twice

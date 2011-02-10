@@ -56,13 +56,10 @@
   <sect1 id="boot-introduction">
     <title>Booting 問題</title>
 
-    <para>Turning on a computer and starting the operating system poses an
-      interesting dilemma.  By definition, the computer does not know how to
-      do anything until the operating system is started.  This includes
-      running programs from the disk.  So if the computer can not run a
-      program from the disk without the operating system, and the operating
-      system programs are on the disk, how is the operating system
-      started?</para>
+    <para>將電腦開機並且開啟一個作業系統是件非常有趣且耐人尋味的事情。
+      理論上，電腦在作業系統被載入前是不知道該如何做事。這包含了從磁碟上執行
+      程式。所以，如果電腦不能在沒有作業系統的狀態下從磁碟執行程式，但是作業系統
+      又是存在磁碟上，那要怎麼執行作業系統呢？</para>
 
     <para>This problem parallels one in the book <citetitle>The Adventures of
       Baron Munchausen</citetitle>.  A character had fallen part way down a

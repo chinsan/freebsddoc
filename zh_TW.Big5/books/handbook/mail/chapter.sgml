@@ -146,7 +146,7 @@
     </sect2>
 
     <sect2 id="mail-mta">
-      <title>Mailhost Server Daemon</title>
+      <title>MTA</title>
       <indexterm>
         <primary>mail server daemons</primary>
         <secondary><application>sendmail</application></secondary>
@@ -164,77 +164,67 @@
         <secondary><application>exim</application></secondary>
       </indexterm>
 
-      <para>&os; ships with <application>sendmail</application> by
-	default, but also support numerous other mail server daemons,
-	just some of which include:</para>
+      <para>&os; 預設是採 <application>sendmail</application> 作為 MTA，
+	但也支援許多其他的 MTA，茲舉例如下：</para>
 
       <itemizedlist>
 	<listitem>
-	  <para><application>exim</application>;</para>
+	  <para><application>exim</application></para>
 	</listitem>
 
 	<listitem>
-	  <para><application>postfix</application>;</para>
+	  <para><application>postfix</application></para>
 	</listitem>
 
 	<listitem>
-	  <para><application>qmail</application>.</para>
+	  <para><application>qmail</application></para>
 	</listitem>
       </itemizedlist>
 
-      <para>The server daemon usually has two functions&mdash;it is responsible
-	for receiving incoming mail as well as delivering outgoing mail.  It is
-	<emphasis>not</emphasis> responsible for the collection of mail using protocols
-	such as <acronym>POP</acronym> or <acronym>IMAP</acronym> to
-	read your email, nor does it allow connecting to local
-	<filename>mbox</filename> or Maildir mailboxes.  You may require
-	an additional <link linkend="mail-receive">daemon</link> for
-	that.</para>
+      <para>Mail server daemon 通常有兩種功能 &mdash; 收信、發信。  不過並
+	<emphasis>不負責</emphasis> 使用類似 <acronym>POP</acronym> 或
+	<acronym>IMAP</acronym> 之類的協定來讀取信件，
+	也不負責連到本機的 <filename>mbox</filename> 或 Maildir 信箱。
+	這些必須要用其他的 <link linkend="mail-receive">daemon</link>
+	才可以。</para>
 
       <warning>
-	<para>Older versions of <application>sendmail</application>
-	  have some serious security issues which may result in an
-	  attacker gaining local and/or remote access to your machine.
-	  Make sure that you are running a current version to avoid
-	  these problems.  Optionally, install an alternative
-	  <acronym>MTA</acronym> from the <link linkend="ports">&os;
-	  Ports Collection</link>.</para>
+	<para>舊版的 <application>sendmail</application> 有一些嚴重的安全漏洞，
+	  會導致攻擊者可以從遠端或本機來控制主機。
+	  使用前最好先確認目前所用的是最新的，以避免這些不必要的問題。  此外，
+	  也可透過 <link linkend="ports">&os; Ports Collection</link>
+	  來安裝其他的 <acronym>MTA</acronym>。</para>
       </warning>
     </sect2>
 
     <sect2 id="mail-dns">
-      <title>Email and DNS</title>
+      <title>Email 及 DNS</title>
 
-      <para>The Domain Name System (DNS) and its daemon
-        <command>named</command> play a large role in the delivery of
-	email.  In order to deliver mail from your site to another, the
-	server daemon will look up the remote site in the DNS to determine the
-	host that will receive mail for the destination.  This process
-	also occurs when mail is sent from a remote host to your mail
-	server.</para>
+      <para>Domain Name System (DNS) 及其 daemon 程式(<command>named</command>)
+	在信件傳遞過中當中，扮演相當重要的角色。  為了要能順利發信出去給其他地方
+	，mail server daemon 會透過 DNS 來查詢要收信的地方為何。  同樣地，
+	外面若要寄信到你的機器，也會作 DNS 查詢。</para>
 
       <indexterm>
 	<primary>MX record</primary>
       </indexterm>
 
-      <para><acronym>DNS</acronym> is responsible for mapping
-	hostnames to IP addresses, as well as for storing information
-	specific to mail delivery, known as MX records.  The MX (Mail
-	eXchanger) record specifies which host, or hosts, will receive
-	mail for a particular domain.  If you do not have an MX record
-	for your hostname or domain, the mail will be delivered
-	directly to your host provided you have an A record pointing
-	your hostname to your IP address.</para>
+      <para><acronym>DNS</acronym> 會負責 hostname 與 IP 位址之間的對應，
+	同時也會記錄郵件傳遞時所需的資訊，這些資訊即是所謂的 MX (Mail
+	eXchanger) 紀錄。  IP 位址被存放在 A 記錄中，而 MX
+	記錄存放的是該 domain 的郵件是由哪台(或哪些)機器要負責收。
+	若要收信的機器或該 domain 沒有設定 MX 記錄的話，
+	則郵件會直接傳給該 hostname 所對應的 A 紀錄所記載之 IP 上。</para>
 
-      <para>You may view the MX records for any domain by using the
-	&man.host.1; command, as seen in the example below:</para>
+      <para>此外，可以透過 &man.host.1; 指令來查詢任何 domain 所對應的
+	MX 紀錄為何，就像下面這樣：</para>
 
       <screen>&prompt.user; <userinput>host -t mx FreeBSD.org</userinput>
 FreeBSD.org mail is handled (pri=10) by mx1.FreeBSD.org</screen>
     </sect2>
 
     <sect2 id="mail-receive">
-      <title>Receiving Mail</title>
+      <title>收信</title>
       <indexterm>
         <primary>email</primary>
         <secondary>receiving</secondary>

@@ -64,12 +64,11 @@
 
     <itemizedlist>
       <listitem>
-		<para>了解 &os; 如何看待磁碟(<xref linkend="disks">) 。</para>
-	  </listitem>
-
+	<para>了解 &os; 如何看待磁碟(<xref linkend="disks">) 。</para>
+      </listitem>
       <listitem>
-	<para>知道如何設定、安裝新的 &os; 核心 
-		(<xref linkend="kernelconfig">) 。</para>
+	<para>知道如何設定、安裝新的 &os; 核心
+	  (<xref linkend="kernelconfig">)。</para>
       </listitem>
     </itemizedlist>
   </sect1>
@@ -77,7 +76,7 @@
   <sect1 id="GEOM-intro">
     <title>GEOM 導論</title>
 
-	<para>GEOM 透過 privoder(即 <filename role="directory">/dev/</filename>
+	<para>GEOM 透過 provider(即 <filename role="directory">/dev/</filename>
 	下的特殊裝置檔案) 來操控 classes(如 Master Boot Records、
 	<acronym>BSD</acronym> labels 等) 。GEOM 支援多種軟體 
 	<acronym>RAID</acronym> 配置，透過 GEOM 存取時，
@@ -153,8 +152,7 @@
 	  例如下面的指令會分散連結(striping)兩個未使用、尚未分割區的 <acronym>ATA</acronym>
 	  磁碟(<filename>/dev/ad2</filename> 和 
 	  <filename>/dev/ad3</filename>) ：</para>
-        <screen>&prompt.root; <userinput>
-		gstripe label -v st0 /dev/ad2 /dev/ad3</userinput></screen>
+        <screen>&prompt.root; <userinput>gstripe label -v st0 /dev/ad2 /dev/ad3</userinput></screen>
 
         <screen>&prompt.root; <userinput>gstripe label -v st0 /dev/ad2 /dev/ad3</userinput></screen>
 

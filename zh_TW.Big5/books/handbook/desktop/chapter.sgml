@@ -1,6 +1,6 @@
 <!--
      The FreeBSD Documentation Project
-     $FreeBSD: doc/zh_TW.Big5/books/handbook/desktop/chapter.sgml,v 1.4 2007/06/30 06:39:02 chinsan Exp $
+     $FreeBSD: doc/zh_TW.Big5/books/handbook/desktop/chapter.sgml,v 1.3 2006/06/17 10:22:45 vanilla Exp $
      Original revision: 1.72
 -->
 
@@ -292,9 +292,9 @@
       <para>接下來去裝 <filename
 	role="package">www/linuxpluginwrapper</filename>。
         linuxpluginwrapper 需要先裝一個很大的 <filename
-	role="package">emulators/linux_base</filename>port。
+	role="package">emulators/linux_base</filename> port。
 	然後根據 port 所指示的作法，
-        去正確地設定你的 <filename>/etc/libmap.conf</filename>！
+        去正確地設定你的 <filename>/etc/libmap.conf</filename>!
         設定的範例檔案位於
 	<filename>/usr/local/share/examples/linuxpluginwrapper/</filename>
 	的目錄底下。</para>
@@ -382,7 +382,7 @@
     <para>當開始進行辦公，
       新的使用者通常會去找好用的辦公室軟體或是好上手的文字處理器。
       目前 有些<link linkend="x11-wm">桌面環境</link> 像是
-      <application>KDE</application>已經提供了辦公軟體組合的套件。
+      <application>KDE</application> 已經提供了辦公軟體組合的套件。
       FreeBSD 提供了所需的所有辦公軟體，桌面環境也不例外。</para>
 
     <para>這節涵蓋了下列的這些軟體：</para>

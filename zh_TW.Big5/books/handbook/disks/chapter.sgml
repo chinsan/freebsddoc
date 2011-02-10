@@ -17,8 +17,8 @@
 	<para>譯註：雖然有些設備沒有『碟片』，例如 USB 隨身碟，
 	  不過在此仍把 Disk 譯為『碟片裝置』。此外，為方便起見，
 	  後文所有的 Disk 都譯為『磁碟』。</para></footnote>
-      包含 memory-backed disk (用記憶體作為磁碟使用)、跨網路使用的磁碟、
-      標準 SCSI/IDE 磁碟、USB 介面的設備等。</para>
+	  包含 memory-backed disk (用記憶體作為磁碟使用)、跨網路使用的磁碟、
+	  標準 SCSI/IDE 磁碟、USB 介面的設備等。</para>
 
     <para>閱讀本章後，您裝學會：</para>
     <itemizedlist>

@@ -62,7 +62,7 @@
       </listitem>
 
       <listitem>
-	<para><xref linkend="advanced-networking">進階網路應用一章新增有關在 FreeBSD 中使用藍芽設備、安裝無線網路以及使用 ATM(Asynchronous Transfer Mode) 
+	<para><xref linkend="advanced-networking">進階網路應用一章新增有關在 FreeBSD 中使用藍牙設備、安裝無線網路以及使用 ATM(Asynchronous Transfer Mode) 
 	  網路的介紹。</para>
       </listitem>
 
@@ -176,70 +176,60 @@
     <varlistentry>
       <term><emphasis><xref linkend="basics">, &unix; 基礎概念篇</emphasis></term>
       <listitem>
-	<para>Covers the basic commands and functionality of the
-	FreeBSD operating system.  If you are familiar with &linux; or
-	another flavor of &unix; then you can probably skip this
-	chapter.</para>
+	<para>涵蓋 FreeBSD 的基本命令及功能介紹。如果您對 &linux; 或其他 &unix; 系統熟悉，您可能可以直接跳過此章。</para>
       </listitem>
     </varlistentry>
     <varlistentry>
       <term><emphasis><xref linkend="ports">, 軟體套件管理篇</emphasis></term>
       <listitem>
-	<para>Covers the installation of third-party software with
-	both FreeBSD's innovative <quote>Ports Collection</quote> and standard
-	binary packages.</para>
+	<para>涵蓋如何透過 FreeBSD 創新的 <quote>Ports Collection</quote> 及標準的 binary 套件來
+	安裝 third-party 軟體。</para>
       </listitem>
     </varlistentry>
     <varlistentry>
       <term><emphasis><xref linkend="x11">, X Window 視窗系統篇</emphasis></term>
       <listitem>
-	<para>Describes the X Window System in general and using
-	X11 on FreeBSD in particular.  Also describes common
-	desktop environments such as <application>KDE</application> and <application>GNOME</application>.</para>
+	<para>介紹 X Window 系統及詳述如何在 FreeBSD 下使用 X11。並介紹常見的桌面環境，
+        例如 <application>KDE</application> 及 <application>GNOME</application>。</para>
       </listitem>
     </varlistentry>
 
 <!-- Part II Common Tasks -->
 
     <varlistentry>
-      <term><emphasis><xref linkend="desktop">, Desktop Applications</emphasis></term>
+      <term><emphasis><xref linkend="desktop">, 桌面應用程式篇</emphasis></term>
       <listitem>
-        <para>Lists some common desktop applications, such as web browsers
+        <para>列出部分常用桌面應用程式，例如網頁瀏覽器
          and productivity suites, and describes how to install them on
          FreeBSD.</para>
       </listitem>
     </varlistentry>
     <varlistentry>
-      <term><emphasis><xref linkend="multimedia">, Multimedia</emphasis></term>
+      <term><emphasis><xref linkend="multimedia">, 多媒體應用篇</emphasis></term>
       <listitem>
-      <para>Shows how to set up sound and video playback support for your
-      system.  Also describes some sample audio and video applications.</para>
+      <para>示範如何設定音效及影像播放。並介紹某些音效及影像軟體。</para>
       </listitem>
     </varlistentry>
     <varlistentry>
-      <term><emphasis><xref linkend="kernelconfig">, Configuring the FreeBSD
-      Kernel</emphasis></term>
+      <term><emphasis><xref linkend="kernelconfig">, 設定 FreeBSD 核心篇</emphasis></term>
       <listitem>
-	<para>Explains why you might need to configure a new kernel
-	and provides detailed instructions for configuring, building,
-	and installing a custom kernel.</para>
+	<para>解釋為什麼您需要設定一個新核心並提供設定、編譯、安裝新核心的細節。</para>
       </listitem>
     </varlistentry>
     <varlistentry>
       <term><emphasis><xref linkend="printing">, 列印篇</emphasis></term>
       <listitem>
-	<para>Describes managing printers on FreeBSD, including
+	<para>介紹如何在 FreeBSD 上管理您的印表機，including
 	information about banner pages, printer accounting, and
 	initial setup.</para>
       </listitem>
     </varlistentry>
     <varlistentry>
-      <term><emphasis><xref linkend="linuxemu">, &linux; Binary Compatibility</emphasis></term>
+      <term><emphasis><xref linkend="linuxemu">, &linux; Binary 相容篇</emphasis></term>
       <listitem>
-	<para>Describes the &linux; compatibility features of FreeBSD.
-	Also provides detailed installation instructions for many
-	popular &linux; applications such as <application>&oracle;</application>, <application>&sap.r3;</application>, and
-	  <application>&mathematica;</application>.</para>
+	<para>描述 &linux; 與 FreeBSD 的相容性。並提供大多數常見 &linux; 應用程式
+	的安裝流程，例如 <application>&oracle;</application>、<application>&sap.r3;</application> 及 
+	<application>&mathematica;</application>。</para>
       </listitem>
     </varlistentry>
 

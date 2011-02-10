@@ -101,8 +101,8 @@
       (<quote>gateway</quote>)。
       這對位址表示要送到<emphasis>目的地</emphasis>的封包，
       必須經過<emphasis>閘道</emphasis>。
-      目的地分為三種類型：主機、子網路(subnet)、預設路由(
-      <quote>default route</quote>。  若都沒有其它的路由可以使用，
+      目的地分為三種類型：主機、子網路(subnet)、
+      預設路由(<quote>default route</quote>)。  若都沒有其它的路由可以使用，
       這時就會使用預設路由，稍後我們會對預設路由作進一步的說明。  此外，
       閘道也可分為三種類型：主機、傳輸介面(interface，也稱為
       <quote>links</quote>)、乙太網路硬體位址(MAC addresses)。</para>
@@ -129,37 +129,30 @@ host2.example.com link#1             UC          0        0
 224              link#1             UC          0        0</screen>
 
       <indexterm><primary>default route</primary></indexterm>
-      <para>The first two lines specify the default route (which we
-	will cover in the <link linkend="network-routing-default">next
-	  section</link>) and the <hostid>localhost</hostid> route.</para>
+      <para>前兩行是 default route(<link linkend="network-routing-default">
+	下一小節</link>會介紹)，以及 <hostid>localhost</hostid> route。</para>
 
       <indexterm><primary>loopback device</primary></indexterm>
-      <para>The interface (<literal>Netif</literal> column) that this
-	routing table specifies to use for
-	<literal>localhost</literal> is <devicename>lo0</devicename>,
-	also known as the loopback device.  This says to keep all
-	traffic for this destination internal, rather than sending it
-	out over the LAN, since it will only end up back where it
-	started.</para>
+      <para>The interface (在 <literal>Netif</literal> 那欄)可以看到
+	<literal>localhost</literal> 的 interface 是用
+	<devicename>lo0</devicename>，亦即所謂的 loopback 設備。
+	這表示所有通往目的地之封包，並不會透過 LAN 傳到網路上，
+	而是在內部處理。  因為這些流量起點跟終點都只會是同一處。</para>
 
       <indexterm>
         <primary>Ethernet</primary>
         <secondary>MAC address</secondary>
       </indexterm>
-      <para>The next thing that stands out are the addresses beginning
-	with <hostid role="mac">0:e0:</hostid>.  These are Ethernet
-	hardware addresses, which are also known as MAC addresses.
-	FreeBSD will automatically identify any hosts
-	(<hostid>test0</hostid> in the example) on the local Ethernet
-	and add a route for that host, directly to it over the
-	Ethernet interface, <devicename>ed0</devicename>.  There is
-	also a timeout (<literal>Expire</literal> column) associated
-	with this type of route, which is used if we fail to hear from
-	the host in a specific amount of time.  When this happens, the
-	route to this host will be automatically deleted.  These hosts
-	are identified using a mechanism known as RIP (Routing
-	Information Protocol), which figures out routes to local hosts
-	based upon a shortest path determination.</para>
+      <para>接下來則會看到 <hostid role="mac">0:e0:</hostid> 開頭的位址，
+	這些就是所謂的 MAC address。
+	FreeBSD 會自動識別在同一網路內的主機(比如例子中的
+	<hostid>test0</hostid>)，並且將其加入路由表，然後透過
+	<devicename>ed0</devicename> 這個介面直接連過去。
+	這種路由都會有 timeout 機制(<literal>Expire</literal> 欄位)，
+	若與該主機之間一直沒任何來往，在超過特定的時間後就會 timeout，
+	該筆路由就會自動刪除。  這些主機就是運用 RIP (Routing
+	Information Protocol) 機制來識別，藉由 RIP 這項機制，
+	可以得出如何到同一網路內其他機器之間的最短路由。</para>
 
       <indexterm><primary>subnet</primary></indexterm>
       <para>FreeBSD will also add subnet routes for the local subnet (<hostid

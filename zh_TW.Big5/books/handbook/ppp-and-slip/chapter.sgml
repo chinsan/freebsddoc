@@ -2028,7 +2028,7 @@ nameserver <replaceable>y.y.y.y</replaceable></programlisting>
       <!-- 10 Jan 2000 -->
     </sect1info>
 
-    <title>Using PPP over Ethernet (PPPoE)</title>
+    <title>使用 PPP over Ethernet (PPPoE)</title>
     <indexterm><primary>PPP</primary><secondary>over Ethernet</secondary></indexterm>
     <indexterm>
       <primary>PPPoE</primary>
@@ -2039,7 +2039,7 @@ nameserver <replaceable>y.y.y.y</replaceable></programlisting>
       (<acronym>PPPoE</acronym>).</para>
 
     <sect2>
-      <title>Configuring the Kernel</title>
+      <title>設定 Kernel</title>
 
       <para>No kernel configuration is necessary for PPPoE any longer.  If
 	the necessary netgraph support is not built into the kernel, it will
@@ -2047,17 +2047,16 @@ nameserver <replaceable>y.y.y.y</replaceable></programlisting>
     </sect2>
 
     <sect2>
-      <title>Setting Up <filename>ppp.conf</filename></title>
+      <title>設定 <filename>ppp.conf</filename></title>
 
-      <para>Here is an example of a working
-        <filename>ppp.conf</filename>:</para>
+      <para><filename>ppp.conf</filename> 的範例如下:</para>
 
       <programlisting>default:
   set log Phase tun command # you can add more detailed logging if you wish
   set ifaddr 10.0.0.1/0 10.0.0.2/0
 
 name_of_service_provider:
-  set device PPPoE:<replaceable>xl1</replaceable> # replace xl1 with your Ethernet device
+  set device PPPoE:<replaceable>xl1</replaceable> # 將 xl1 取代為您目前的 Ethernet 裝置
   set authname YOURLOGINNAME
   set authkey YOURPASSWORD
   set dial
@@ -2067,23 +2066,23 @@ name_of_service_provider:
     </sect2>
 
     <sect2>
-      <title>Running <application>ppp</application></title>
+      <title>執行 <application>ppp</application></title>
 
-      <para>As <username>root</username>, you can run:</para>
+      <para>使用 <username>root</username> 執行下列指令:</para>
 
       <screen>&prompt.root; <userinput>ppp -ddial name_of_service_provider</userinput></screen>
 
     </sect2>
 
     <sect2>
-      <title>Starting <application>ppp</application> at Boot</title>
+      <title>於開機啟動 <application>ppp</application></title>
 
-      <para>Add the following to your <filename>/etc/rc.conf</filename>
-        file:</para>
+      <para>新增以下參數至 <filename>/etc/rc.conf</filename>
+        檔案:</para>
 
       <programlisting>ppp_enable="YES"
 ppp_mode="ddial"
-ppp_nat="YES"	# if you want to enable nat for your local network, otherwise NO
+ppp_nat="YES"	# 若您欲啟動 NAT 於區網域路 , 否則填 NO
 ppp_profile="name_of_service_provider"</programlisting>
     </sect2>
 

@@ -5,7 +5,7 @@ SUBDIR+= faq
 SUBDIR+= fdp-primer
 SUBDIR+= handbook
 SUBDIR+= porters-handbook
-#SUBDIR+= zh-tut
+SUBDIR+= zh-tut
 
 ROOT_SYMLINKS = faq fdp-primer handbook porters-handbook
 
